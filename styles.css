@@ -1,0 +1,529 @@
+/* ============================================================
+   Mon Potager en permaculture — habillage
+   ============================================================ */
+
+:root {
+  --vert-fonce:   #2f5738;
+  --vert:         #3d6b45;
+  --vert-clair:   #6f9c6a;
+  --vert-pale:    #e8f0e4;
+  --terre:        #8a6a4f;
+  --terre-pale:   #f4ece2;
+  --soleil:       #d8a33c;
+  --soleil-pale:  #fbf1da;
+  --rouge:        #b4523f;
+  --rouge-pale:   #fbe9e5;
+  --violet:       #7b5aa6;
+  --violet-pale:  #f1ecf8;
+
+  --fond:         #f7f6f1;
+  --carte:        #ffffff;
+  --texte:        #2c2f2a;
+  --texte-doux:   #6b7065;
+  --bordure:      #e2e1d8;
+
+  --rayon:        14px;
+  --ombre:        0 1px 3px rgba(40, 50, 35, .07), 0 6px 18px rgba(40, 50, 35, .05);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--vert); }
+
+.contenu {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 18px 16px calc(96px + env(safe-area-inset-bottom));
+}
+
+/* ---------------- En-têtes ---------------- */
+
+.entete { margin: 6px 0 18px; }
+.entete h1 {
+  margin: 2px 0 4px;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  color: var(--vert-fonce);
+  letter-spacing: -.02em;
+}
+.surtitre {
+  margin: 0;
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--texte-doux);
+  font-weight: 600;
+}
+.sous-titre { margin: 0; color: var(--texte-doux); font-size: .92rem; }
+.latin { margin: 0; font-style: italic; color: var(--texte-doux); font-size: .88rem; }
+
+.retour {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: .9rem;
+  text-decoration: none;
+  color: var(--texte-doux);
+}
+.retour:hover { color: var(--vert); }
+
+.fiche-tete { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
+
+/* ---------------- Cartes ---------------- */
+
+.carte {
+  background: var(--carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--ombre);
+}
+.carte h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  color: var(--vert-fonce);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.carte h4 { margin: 14px 0 4px; font-size: .95rem; color: var(--vert-fonce); }
+.carte p { margin: 0 0 10px; }
+.carte p:last-child { margin-bottom: 0; }
+.marge-haut { margin-top: 18px !important; }
+
+.carte-alerte   { border-left: 4px solid var(--rouge); background: var(--rouge-pale); }
+.carte-suivi    { border-left: 4px solid var(--soleil); background: var(--soleil-pale); }
+.carte-perma    { border-left: 4px solid var(--vert-clair); background: var(--vert-pale); }
+.carte-astuce   { border-left: 4px solid var(--terre); background: var(--terre-pale); }
+.carte-medicinale { border-left: 4px solid var(--violet); background: var(--violet-pale); }
+.carte-mois-actuel { border: 2px solid var(--vert-clair); }
+.carte-reglages { background: #fbfbf8; }
+
+.compteur {
+  background: var(--vert);
+  color: #fff;
+  border-radius: 999px;
+  padding: 1px 9px;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.badge {
+  background: var(--vert-clair);
+  color: #fff;
+  border-radius: 999px;
+  padding: 1px 9px;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.note { color: var(--texte-doux); font-size: .9rem; }
+.rien { color: var(--texte-doux); font-style: italic; font-size: .9rem; }
+.vide { color: var(--texte-doux); text-align: center; padding: 30px 0; }
+.mention-legale {
+  margin-top: 14px;
+  font-size: .78rem;
+  color: var(--texte-doux);
+  border-top: 1px dashed var(--bordure);
+  padding-top: 10px;
+}
+
+.liste-simple { margin: 0; padding-left: 18px; }
+.liste-simple li { margin-bottom: 7px; }
+.lien-plus { display: inline-block; margin-top: 10px; font-size: .9rem; font-weight: 600; text-decoration: none; }
+
+/* ---------------- Boutons ---------------- */
+
+.bouton {
+  display: inline-block;
+  background: var(--vert);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font-size: .95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+.bouton:hover { background: var(--vert-fonce); }
+.bouton-doux { background: #fff; color: var(--vert-fonce); border: 1px solid var(--bordure); }
+.bouton-doux:hover { background: var(--vert-pale); }
+.bouton.fichier { position: relative; overflow: hidden; }
+.bouton.fichier input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.bouton-icone {
+  background: none;
+  border: 0;
+  font-size: 1.05rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 8px;
+  line-height: 1;
+  text-decoration: none;
+}
+.bouton-icone:hover { background: var(--vert-pale); }
+
+.mini-bouton {
+  background: var(--vert-pale);
+  border: 1px solid var(--vert-clair);
+  color: var(--vert-fonce);
+  border-radius: 8px;
+  padding: 2px 9px;
+  font-size: .78rem;
+  font-family: inherit;
+  cursor: pointer;
+  margin-left: 6px;
+}
+.mini-bouton:hover { background: var(--vert-clair); color: #fff; }
+
+.bouton-etoile {
+  background: #fff;
+  border: 1px solid var(--soleil);
+  color: var(--soleil);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: .88rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.bouton-etoile.active { background: var(--soleil); color: #fff; }
+
+.barre-boutons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.actions-fiche { margin-top: 18px; }
+.etoile { color: var(--soleil); }
+
+/* ---------------- Pastilles & nuages ---------------- */
+
+.nuage, .nuage-petit { display: flex; flex-wrap: wrap; gap: 7px; }
+.nuage-petit { gap: 5px; margin-top: 8px; }
+
+.puce {
+  display: inline-block;
+  background: var(--vert-pale);
+  color: var(--vert-fonce);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: .85rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.puce:hover { border-color: var(--vert-clair); }
+.puce-favorite { background: var(--soleil-pale); border-color: var(--soleil); font-weight: 600; }
+.puce-amie { background: var(--vert-pale); color: var(--vert-fonce); }
+.puce-ennemie { background: var(--rouge-pale); color: var(--rouge); }
+.puce-famille { background: var(--terre-pale); color: var(--terre); font-size: .78rem; }
+
+.pastille {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: .78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.act-sa { background: var(--soleil-pale); color: #8a6512; }
+.act-sp { background: var(--vert-pale); color: var(--vert-fonce); }
+.act-pl { background: var(--terre-pale); color: var(--terre); }
+.act-re { background: var(--rouge-pale); color: var(--rouge); }
+
+.titre-action { border-radius: 8px; padding: 6px 10px; }
+
+.lien-plante { font-weight: 600; text-decoration: none; }
+.lien-plante:hover { text-decoration: underline; }
+
+/* ---------------- Filtres ---------------- */
+
+.filtres { margin-bottom: 14px; }
+.champ-recherche {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  font-size: .95rem;
+  font-family: inherit;
+  background: #fff;
+  margin-bottom: 10px;
+}
+.champ-recherche:focus { outline: 2px solid var(--vert-clair); outline-offset: 1px; }
+
+.onglets { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+.onglets-larges { margin-bottom: 14px; }
+.onglet {
+  background: #fff;
+  border: 1px solid var(--bordure);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: .85rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--texte-doux);
+}
+.onglet.actif { background: var(--vert); color: #fff; border-color: var(--vert); font-weight: 600; }
+
+.filtre-mois { margin-bottom: 14px; font-size: .9rem; color: var(--texte-doux); }
+.filtre-mois select { margin-left: 8px; }
+
+/* ---------------- Calendrier ---------------- */
+
+.legende { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; font-size: .82rem; color: var(--texte-doux); }
+.legende-item { display: flex; align-items: center; gap: 5px; }
+
+.calendrier {
+  background: var(--carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  box-shadow: var(--ombre);
+}
+.cal-entete { display: flex; background: var(--vert-pale); font-weight: 700; font-size: .72rem; position: sticky; top: 0; z-index: 2; }
+.cal-ligne { display: flex; border-top: 1px solid var(--bordure); }
+.cal-ligne:hover { background: #fbfbf7; }
+
+.cal-nom {
+  flex: 0 0 42%;
+  min-width: 0;
+  padding: 8px 10px;
+  font-size: .85rem;
+  text-decoration: none;
+  color: var(--texte);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-right: 1px solid var(--bordure);
+}
+.cal-nom-entete { color: var(--vert-fonce); }
+.cal-emoji { flex: 0 0 auto; }
+.cal-cases { flex: 1; display: grid; grid-template-columns: repeat(12, 1fr); }
+.cal-mois { text-align: center; padding: 8px 0; color: var(--vert-fonce); }
+.cal-case {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 1px;
+  border-left: 1px solid #f0efe9;
+  min-height: 34px;
+}
+.cal-actuel { background: rgba(216, 163, 60, .13); }
+.cal-marque { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.cal-marque.act-sa { background: var(--soleil); }
+.cal-marque.act-sp { background: var(--vert-clair); }
+.cal-marque.act-pl { background: var(--terre); }
+.cal-marque.act-re { background: var(--rouge); }
+
+/* ---------------- Fiches plantes ---------------- */
+
+.grille-plantes { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.carte-plante {
+  background: var(--carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 14px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--ombre);
+  display: block;
+}
+.carte-plante:hover { border-color: var(--vert-clair); }
+.carte-plante-tete { display: flex; gap: 10px; align-items: flex-start; }
+.carte-plante-emoji { font-size: 1.5rem; line-height: 1; }
+.carte-plante h3 { margin: 0; font-size: 1rem; color: var(--vert-fonce); }
+.carte-plante-fam { margin: 8px 0 0; font-size: .8rem; color: var(--texte-doux); }
+
+.frise { margin-bottom: 10px; }
+.frise-label { font-size: .82rem; font-weight: 600; color: var(--texte-doux); margin-bottom: 4px; }
+.frise-mois { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+.frise-case {
+  text-align: center;
+  padding: 6px 0;
+  border-radius: 6px;
+  background: #f2f1ec;
+  color: #b9b8b0;
+  font-size: .72rem;
+  font-weight: 700;
+}
+.frise-active { color: #fff !important; }
+.frise-active.act-sa { background: var(--soleil); }
+.frise-active.act-sp { background: var(--vert-clair); }
+.frise-active.act-pl { background: var(--terre); }
+.frise-active.act-re { background: var(--rouge); }
+
+.fiche-infos { margin: 0; display: grid; gap: 8px; }
+.fiche-infos > div { display: grid; grid-template-columns: 42% 1fr; gap: 10px; border-bottom: 1px dashed var(--bordure); padding-bottom: 8px; }
+.fiche-infos > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.fiche-infos dt { font-weight: 600; color: var(--texte-doux); font-size: .88rem; }
+.fiche-infos dd { margin: 0; font-size: .92rem; }
+
+.encart-precaution {
+  background: var(--rouge-pale);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 12px;
+  font-size: .9rem;
+}
+.encart-precaution strong { color: var(--rouge); display: block; margin-bottom: 4px; }
+.encart-precaution p { margin: 0; }
+
+.numero-rotation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--vert);
+  color: #fff;
+  font-size: .85rem;
+}
+
+/* ---------------- Potager ---------------- */
+
+.carte-zone { padding-bottom: 14px; }
+.zone-tete { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.zone-tete h3 { margin: 0 0 2px; }
+.zone-boutons { display: flex; gap: 2px; flex: 0 0 auto; }
+.familles { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 !important; }
+
+.alerte-assoc, .alerte-rotation, .info-assoc {
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: .87rem;
+  margin: 10px 0;
+}
+.alerte-assoc { background: var(--rouge-pale); color: var(--rouge); }
+.alerte-rotation { background: var(--soleil-pale); color: #8a6512; }
+.info-assoc { background: var(--vert-pale); color: var(--vert-fonce); }
+
+.liste-cultures { list-style: none; margin: 10px 0; padding: 0; }
+.culture {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--bordure);
+}
+.culture-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.culture-nom { font-weight: 600; text-decoration: none; color: var(--vert-fonce); }
+.culture-meta { font-size: .82rem; color: var(--texte-doux); }
+.culture-notes { font-size: .84rem; }
+.culture-rotation { font-size: .8rem; color: #8a6512; background: var(--soleil-pale); border-radius: 8px; padding: 4px 8px; margin-top: 4px; }
+.culture-boutons { display: flex; gap: 2px; flex: 0 0 auto; }
+.statut-termine { opacity: .5; }
+
+/* ---------------- Tâches ---------------- */
+
+.liste-taches { list-style: none; margin: 0; padding: 0; }
+.tache {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 9px 0;
+  border-top: 1px solid var(--bordure);
+}
+.tache:first-child { border-top: 0; }
+.tache label { display: flex; gap: 10px; align-items: flex-start; flex: 1; cursor: pointer; min-width: 0; }
+.tache input[type=checkbox] { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--vert); flex: 0 0 auto; }
+.tache-texte { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.tache-date { font-size: .8rem; color: var(--texte-doux); }
+.tache-detail { font-size: .84rem; color: var(--texte-doux); }
+.tache.faite .tache-texte strong { text-decoration: line-through; color: var(--texte-doux); }
+.tache.retard .tache-date { color: var(--rouge); font-weight: 600; }
+
+/* ---------------- Modale ---------------- */
+
+.modale {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 40, 28, .45);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 50;
+  padding: 0;
+}
+.modale.ouverte { display: flex; }
+.modale-boite {
+  background: var(--carte);
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 18px 18px 0 0;
+  padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+}
+.modale-tete { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.modale-tete h2 { margin: 0; font-size: 1.15rem; color: var(--vert-fonce); }
+.modale-corps label { display: block; margin-bottom: 12px; font-size: .88rem; font-weight: 600; color: var(--texte-doux); }
+.modale-corps input, .modale-corps select, .modale-corps textarea {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px 12px;
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  font-size: .95rem;
+  font-family: inherit;
+  font-weight: 400;
+  color: var(--texte);
+  background: #fff;
+}
+.modale-corps textarea { resize: vertical; }
+.modale-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+
+/* ---------------- Navigation ---------------- */
+
+.navigation {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  background: rgba(255, 255, 255, .97);
+  border-top: 1px solid var(--bordure);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 40;
+  backdrop-filter: blur(8px);
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 2px 7px;
+  font-size: .68rem;
+  text-decoration: none;
+  color: var(--texte-doux);
+  font-weight: 600;
+}
+.nav-emoji { font-size: 1.2rem; line-height: 1.1; }
+.nav-item.actif { color: var(--vert); }
+.nav-item.actif .nav-emoji { transform: translateY(-1px); }
+
+@media (min-width: 720px) {
+  .contenu { padding-top: 26px; }
+  .entete h1 { font-size: 2rem; }
+  .modale { align-items: center; padding: 20px; }
+  .modale-boite { border-radius: 18px; }
+  .cal-nom { flex-basis: 34%; }
+}

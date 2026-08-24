@@ -1,0 +1,125 @@
+/* Travaux de permaculture mois par mois, rotation des cultures et préparations naturelles */
+
+const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+const MOIS_COURT = ["Jan","Fév","Mar","Avr","Mai","Juin","Juil","Août","Sep","Oct","Nov","Déc"];
+
+/* Travaux du mois — orientés permaculture (sol vivant, zéro déchet, autonomie) */
+const TRAVAUX = {
+1:[ "Planifier le potager de l'année : dessine tes planches et note la rotation par famille.",
+    "Commander les graines. Privilégie les variétés anciennes reproductibles (semences paysannes).",
+    "Vérifier que le sol n'est jamais nu : paillage, feuilles mortes ou engrais vert partout.",
+    "Nourrir les oiseaux : ce sont tes meilleurs auxiliaires contre les chenilles au printemps.",
+    "Tailler les arbres fruitiers à pépins (pommiers, poiriers) par temps sec et hors gel.",
+    "Récolter poireaux, choux d'hiver, mâche, topinambours, panais." ],
+2:[ "Semer sous abri chauffé : tomates, aubergines, poivrons, céleris.",
+    "Pré-germer les pommes de terre dans un endroit clair, frais et hors gel.",
+    "Planter l'ail rose, les échalotes, si le sol n'est pas détrempé.",
+    "Étaler le compost mûr sur les planches, sans l'enfouir : les vers de terre s'en chargeront.",
+    "Installer des nichoirs à mésanges : une famille consomme des milliers de chenilles.",
+    "Semer fèves et petits pois en pleine terre si le sol se ressuie." ],
+3:[ "Grand mois de semis : carottes, radis, épinards, laitues, pois, panais, betteraves sous abri.",
+    "Planter les pommes de terre à partir de la fin du mois.",
+    "Diviser les touffes de vivaces aromatiques : ciboulette, oseille, estragon, menthe.",
+    "Semer les engrais verts de printemps (phacélie, moutarde) sur les planches libres.",
+    "Préparer le premier purin d'ortie avec les jeunes pousses.",
+    "Installer les tuteurs et les rames avant que tout ne pousse." ],
+4:[ "Semer en pleine terre : carottes, radis, betteraves, laitues, haricots en fin de mois sous voile.",
+    "Repiquer en godets les semis de tomates, courges, courgettes.",
+    "Pailler les fraisiers avant la fructification.",
+    "Surveiller les gelées tardives : garde un voile d'hivernage sous la main.",
+    "Éclaircir les semis pour laisser la place aux plants les plus vigoureux.",
+    "Semer les fleurs compagnes : capucines, œillets d'Inde, soucis, bourrache." ],
+5:[ "Après les Saints de Glace (mi-mai) : planter tomates, courgettes, concombres, aubergines, poivrons, basilic.",
+    "Semer les haricots, le maïs, les courges directement en place.",
+    "Pailler massivement partout : c'est l'action la plus rentable de toute l'année.",
+    "Purin d'ortie dilué à 10 % sur les jeunes plants pour les booster.",
+    "Repiquer les poireaux d'été.",
+    "Installer les voiles anti-insectes sur les carottes, poireaux et choux." ],
+6:[ "Récolter les premières salades, fraises, pois, fèves, courgettes.",
+    "Tailler les gourmands des tomates et les tuteurer.",
+    "Arroser au pied, le matin ou le soir, en profondeur et espacé plutôt qu'un peu tous les jours.",
+    "Semer les derniers haricots et les choux d'hiver.",
+    "Récolter les plantes médicinales en pleine floraison : millepertuis, camomille, achillée, lavande.",
+    "Couper la consoude une première fois pour le purin et le paillage." ],
+7:[ "Arroser malin : paillage épais, arrosage espacé et abondant, oyas si tu peux.",
+    "Semer les légumes d'automne et d'hiver : chicorées, navets, épinards, mâche fin juillet.",
+    "Récolter et faire sécher les aromatiques au maximum de leur parfum.",
+    "Purin de consoude à la fructification des tomates, courges et poivrons.",
+    "Récolter tous les 2-3 jours courgettes et haricots pour maintenir la production.",
+    "Laisser monter en graine 1 ou 2 pieds de chaque légume pour récupérer tes semences." ],
+8:[ "Semer mâche, épinards, radis d'hiver, navets, laitues d'automne.",
+    "Repiquer les stolons de fraisiers pour renouveler la fraiseraie.",
+    "Récolter et sécher les graines : tomates, haricots, laitues, fleurs.",
+    "Arracher l'ail et les oignons, les faire sécher au soleil avant stockage.",
+    "Continuer à pailler : le sol nu en août, c'est de l'eau perdue.",
+    "Préparer les emplacements d'automne en semant des engrais verts sur les planches libérées." ],
+9:[ "Planter les fraisiers, diviser les vivaces, planter l'ail des ours à l'ombre.",
+    "Semer la mâche, le cerfeuil, les épinards, les engrais verts d'hiver (seigle, vesce, féverole).",
+    "Récolter les courges avant les premières fraîcheurs, quand le pédoncule est sec.",
+    "Récolter les baies de sureau et les racines médicinales (bardane, pissenlit, valériane).",
+    "Ramasser et composter, ne rien jeter : tout retourne au sol.",
+    "Bouturer romarin, lavande, sauge, verveine." ],
+10:[ "Planter l'ail blanc et violet, les échalotes : c'est le bon moment pour de gros bulbes.",
+    "Semer fèves et pois d'hiver.",
+    "Ramasser les feuilles mortes : c'est de l'or, en paillage ou en compost.",
+    "Rentrer les plantes frileuses (verveine citronnelle, laurier en pot).",
+    "Planter les arbres et arbustes : « à la Sainte-Catherine, tout bois prend racine ».",
+    "Nettoyer et ranger les tuteurs, voiles et outils." ],
+11:[ "Couvrir toutes les planches vides : compost + feuilles mortes + carton, ou engrais vert.",
+    "Planter les fruitiers, les petits fruits (framboisiers, groseilliers), les haies champêtres.",
+    "Butter les artichauts et pailler les vivaces fragiles.",
+    "Récolter les topinambours, panais, poireaux, choux au fur et à mesure des besoins.",
+    "Construire ou retourner le compost.",
+    "Laisser des zones sauvages : tas de bois, feuilles, tiges creuses pour héberger les auxiliaires." ],
+12:[ "Ne rien faire au jardin, c'est aussi de la permaculture : le sol travaille tout seul.",
+    "Faire le bilan de l'année : ce qui a marché, ce qui a raté, ce qu'on ne replante pas.",
+    "Trier les graines récoltées et vérifier leur étiquetage.",
+    "Réparer et affûter les outils.",
+    "Vérifier les réserves stockées (courges, pommes de terre, oignons) et retirer ce qui s'abîme.",
+    "Récolter mâche, poireaux, choux kale meilleurs après les gelées." ]
+};
+
+/* Rotation des cultures : ordre conseillé sur une même planche */
+const ROTATION = [
+  { ordre:1, groupe:"Légumes-feuilles (gourmands en azote)", familles:["Brassicacées","Chénopodiacées","Astéracées"],
+    exemples:"Choux, épinards, blettes, salades", note:"Se placent juste après un apport de compost ou après des légumineuses." },
+  { ordre:2, groupe:"Légumes-fruits (très gourmands)", familles:["Solanacées","Cucurbitacées"],
+    exemples:"Tomates, courges, courgettes, poivrons, aubergines", note:"Sol très riche nécessaire. Jamais deux ans de suite au même endroit." },
+  { ordre:3, groupe:"Légumes-racines (peu gourmands)", familles:["Apiacées","Amaryllidacées"],
+    exemples:"Carottes, panais, poireaux, oignons, ail", note:"Ne jamais mettre de fumier frais avant : les racines fourchent." },
+  { ordre:4, groupe:"Légumineuses (elles nourrissent le sol)", familles:["Fabacées"],
+    exemples:"Haricots, pois, fèves", note:"Elles fixent l'azote : elles referment le cycle et préparent le tour suivant." }
+];
+
+/* Préparations naturelles maison */
+const PREPARATIONS = [
+  { nom:"Purin d'ortie", quand:"Mars à septembre", recette:"1 kg d'orties fraîches hachées pour 10 L d'eau de pluie. Laisser fermenter 10 à 15 jours en remuant chaque jour, jusqu'à ce que les bulles cessent. Filtrer.",
+    usage:"Engrais azoté : dilué à 10 % (1 L pour 10 L d'eau) en arrosage au pied, sur les légumes-feuilles et les jeunes plants. Répulsif pucerons : dilué à 5 % en pulvérisation.",
+    attention:"Ne jamais l'utiliser pur, il brûlerait les racines. Odeur forte : prépare-le loin de la maison." },
+  { nom:"Purin de consoude", quand:"Mai à septembre", recette:"1 kg de feuilles de consoude pour 10 L d'eau de pluie, 10 à 15 jours de fermentation. Filtrer.",
+    usage:"Engrais riche en potasse : dilué à 10 %, au moment de la floraison et de la fructification des tomates, courges, poivrons, fraisiers.",
+    attention:"C'est le complément parfait du purin d'ortie : l'ortie pour la croissance, la consoude pour les fruits." },
+  { nom:"Décoction de prêle", quand:"Mars à juin, en préventif", recette:"1 kg de prêle fraîche pour 10 L d'eau. Faire tremper 24 h, puis bouillir 20 min. Laisser refroidir et filtrer.",
+    usage:"Antifongique préventif (mildiou, oïdium, tavelure) : dilué à 20 %, en pulvérisation tous les 15 jours par temps humide.",
+    attention:"Préventif uniquement : une fois le mildiou installé, il est trop tard." },
+  { nom:"Macération d'ail", quand:"Toute l'année", recette:"100 g de gousses d'ail écrasées dans 1 L d'eau bouillante. Laisser refroidir 24 h, filtrer.",
+    usage:"Antifongique et répulsif : pur en pulvérisation sur les feuilles, le soir, contre pucerons, acariens et maladies fongiques.",
+    attention:"Ne pas pulvériser en plein soleil, cela brûlerait les feuilles." },
+  { nom:"Décoction de tanaisie", quand:"Juin à septembre", recette:"300 g de tanaisie fraîche (ou 30 g séchée) pour 10 L d'eau. Bouillir 20 min, laisser refroidir, filtrer.",
+    usage:"Insecticide et répulsif : pur en pulvérisation contre doryphores, piérides, altises, carpocapse.",
+    attention:"Efficace mais non sélectif : il touche aussi les auxiliaires. À réserver aux vraies attaques." },
+  { nom:"Savon noir", quand:"Dès l'apparition des pucerons", recette:"5 cuillères à soupe de savon noir liquide dans 1 L d'eau tiède.",
+    usage:"Pulvérisation directe sur les colonies de pucerons, cochenilles et aleurodes, le soir. Renouveler 3 jours de suite.",
+    attention:"Bien pulvériser sous les feuilles. Rincer les légumes avant consommation." }
+];
+
+/* Astuces permaculture transversales */
+const PRINCIPES = [
+  { titre:"Ne jamais laisser le sol nu", texte:"Un sol nu se tasse, se dessèche, perd ses nutriments et se couvre d'herbes indésirables. Paillage, engrais vert ou culture : il y a toujours quelque chose à mettre dessus." },
+  { titre:"Ne pas retourner la terre", texte:"Bêcher détruit la vie du sol (vers, champignons, bactéries) qui met des années à s'installer. Aère à la grelinette et laisse le compost en surface : les vers l'enfouiront pour toi." },
+  { titre:"Associer plutôt que séparer", texte:"Mélanger les cultures brouille les pistes des ravageurs, qui repèrent leurs plantes à l'odeur. Une planche mélangée est bien plus résistante qu'une monoculture en rangs." },
+  { titre:"Accueillir les auxiliaires", texte:"Coccinelles, syrphes, chrysopes, hérissons, oiseaux, crapauds : offre-leur le gîte (haies, tas de bois, tiges creuses, point d'eau) et ils réguleront les ravageurs gratuitement." },
+  { titre:"Observer avant d'agir", texte:"Une année d'observation vaut mieux que dix ans de corrections. Note où le soleil tape, où l'eau stagne, où le vent souffle, avant de décider de l'emplacement d'une planche." },
+  { titre:"Produire ses graines", texte:"Laisse monter en graine un ou deux pieds de chaque légume : les plantes s'adaptent progressivement à ton terrain et deviennent plus résistantes chaque année." },
+  { titre:"L'eau se gère par le sol", texte:"Un sol riche en matière organique retient beaucoup plus d'eau. 5 cm de paillage divisent par deux ou trois les besoins d'arrosage." }
+];
