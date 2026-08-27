@@ -4,6 +4,19 @@
 
 const NOUVEAUTES = [
 
+{ version: "2.6", date: "2026-08-27", titre: "L'appli se rouvre là où tu l'as laissée",
+  points: [
+    { emoji: "🐞", texte: "<strong>Correction</strong> : rouvrir l'appli — surtout depuis l'icône installée — ramenait toujours sur l'accueil. Elle retrouve maintenant l'écran où tu étais." },
+    { emoji: "📑", texte: "<strong>Et le sous-onglet aussi</strong> : si tu étais dans Perma → Le sol → Les gestes, tu y reviens directement. Idem pour le plan que tu avais ouvert." }
+  ] },
+
+{ version: "2.5", date: "2026-08-27", titre: "L'écran ne remonte plus tout seul",
+  points: [
+    { emoji: "🐞", texte: "<strong>Correction</strong> : chaque clic sur le plan du potager renvoyait la page tout en haut, obligeant à redescendre à chaque case peinte. L'écran reste maintenant exactement où tu l'as laissé." },
+    { emoji: "↔️", texte: "Le <strong>défilement latéral</strong> d'un grand plan est lui aussi conservé : tu ne repars plus de la gauche à chaque case." },
+    { emoji: "✅", texte: "Même correction partout : cocher une tâche, noter une récolte ou changer un réglage ne fait plus sauter la page. Seul un vrai changement d'écran remonte en haut." }
+  ] },
+
 { version: "2.4", date: "2026-08-27", titre: "41 plantes de plus, dont les engrais verts",
   points: [
     { emoji: "🌾", texte: "<strong>Nouvelle catégorie Engrais verts</strong> : phacélie, moutarde, seigle, vesce, trèfle incarnat, sarrasin. Cultivés sur le plan, ils comptent comme un repos de la terre." },

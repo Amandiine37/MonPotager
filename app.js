@@ -49,7 +49,7 @@ const etatVide = () => ({
   reglages: {
     notifs: false, dernierRappel: "", anneePlanning: 0, derniereNouveauteVue: "",
     derniereSauvegarde: "", rappelSauvegardeMasque: "", bienvenueVue: false,
-    stockagePersistant: false
+    stockagePersistant: false, position: null
   }
 });
 
@@ -450,6 +450,8 @@ function pageInconnue() {
   return h && !PAGES.includes(h) ? h : null;
 }
 
+let dernierHashAffiche = null;
+
 function afficher() {
   const conteneur = document.getElementById("contenu");
 
@@ -471,17 +473,71 @@ function afficher() {
   document.querySelectorAll(".nav-item").forEach(b => {
     b.classList.toggle("actif", b.dataset.page === page);
   });
+
+  /* On ne remonte en haut que lorsqu'on CHANGE d'écran. Redessiner l'écran
+     courant (cocher une tâche, peindre une case du plan…) doit laisser la
+     page exactement où elle est : sinon, chaque clic renvoie tout en haut. */
+  const memeEcran = location.hash === dernierHashAffiche;
+  const positionY = window.scrollY;
+  const defilementsHorizontaux = [...document.querySelectorAll(".plan-defilement")].map(e => e.scrollLeft);
+
   conteneur.innerHTML = VUES[page](argumentPage());
-  conteneur.scrollTop = 0;
-  window.scrollTo(0, 0);
+
+  if (memeEcran) {
+    window.scrollTo(0, positionY);
+    document.querySelectorAll(".plan-defilement").forEach((e, i) => {
+      if (defilementsHorizontaux[i] != null) e.scrollLeft = defilementsHorizontaux[i];
+    });
+  } else {
+    conteneur.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }
+  dernierHashAffiche = location.hash;
+
   majCloche();
   majBarreMeteo();
+  memoriserPosition();
+}
+
+/* ---------------- Retrouver son écran ----------------
+   L'appli installée redémarre toujours sur son adresse de départ, sans repère
+   d'écran : sans cela, on retombe sur l'accueil à chaque ouverture. On mémorise
+   donc l'écran ET le sous-onglet, et on les restaure au démarrage. */
+
+function memoriserPosition() {
+  const p = etat.reglages.position || (etat.reglages.position = {});
+  const avant = JSON.stringify(p);
+
+  p.hash = location.hash || "#accueil";
+  if (typeof ongletPotager !== "undefined") p.potager = ongletPotager;
+  if (typeof ongletPlanning !== "undefined") p.planning = ongletPlanning;
+  if (typeof ongletPerma !== "undefined") p.perma = ongletPerma;
+  if (typeof ongletSol !== "undefined") p.sol = ongletSol;
+  if (typeof planOuvert !== "undefined" && planOuvert) p.plan = planOuvert;
+
+  // On n'écrit que si la position a réellement bougé
+  if (JSON.stringify(p) === avant) return;
+  try { localStorage.setItem(CLE_STOCKAGE, JSON.stringify(etat)); } catch (e) {}
+}
+
+function restaurerPosition() {
+  const p = etat.reglages.position;
+  if (!p) return;
+  if (p.potager && typeof ongletPotager !== "undefined") ongletPotager = p.potager;
+  if (p.planning && typeof ongletPlanning !== "undefined") ongletPlanning = p.planning;
+  if (p.perma && typeof ongletPerma !== "undefined") ongletPerma = p.perma;
+  if (p.sol && typeof ongletSol !== "undefined") ongletSol = p.sol;
+  if (p.plan && typeof planOuvert !== "undefined") planOuvert = p.plan;
+
+  // Si l'adresse ne dit rien (appli installée, raccourci…), on reprend où on était
+  if (!location.hash && p.hash && p.hash !== "#accueil") location.hash = p.hash;
 }
 
 window.addEventListener("hashchange", afficher);
 
 window.addEventListener("DOMContentLoaded", () => {
   synchroniserTaches();
+  restaurerPosition();
   sauver();
   afficher();
   verifierRappels();
