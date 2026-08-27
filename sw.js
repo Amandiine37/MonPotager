@@ -4,7 +4,7 @@
    C'est ce qui garantit que le navigateur retélécharge bien tous les fichiers
    au lieu d'en garder d'anciens, ce qui donne des nouveautés qui « ne marchent pas ». */
 
-const VERSION = "1.6";
+const VERSION = "1.7";
 const CACHE = "potager-v" + VERSION;
 
 const FICHIERS = [

@@ -51,11 +51,14 @@ service cloud.firestore {
       allow get: if connecte();
       allow list: if false;
 
+      // La borne est volontairement large : l'horloge d'un téléphone peut avoir
+      // plusieurs minutes d'écart avec celle du serveur. Ce qui compte vraiment,
+      // c'est la vérification de l'expiration AU MOMENT DE L'UTILISATION, plus bas.
       allow create: if connecte()
                     && estMembre(request.resource.data.potager)
                     && request.resource.data.utilise == false
-                    && request.resource.data.expireLe is int
-                    && request.resource.data.expireLe <= request.time.toMillis() + 86400000;
+                    && request.resource.data.expireLe is number
+                    && request.resource.data.expireLe <= request.time.toMillis() + 172800000;
 
       // seule la mise à "utilise" est permise, et une seule fois
       allow update: if connecte()

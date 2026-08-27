@@ -11,7 +11,9 @@
 
 const SDK_FIREBASE = "https://www.gstatic.com/firebasejs/10.12.2/";
 const DELAI_ENVOI_MS = 1500;      // on regroupe les modifications rapprochées
-const DUREE_APPAIRAGE_MS = 24 * 3600 * 1000;
+/* 23 h et non 24 : l'horloge de l'appareil peut être en avance sur celle du
+   serveur, et la règle de sécurité refuserait une date trop lointaine. */
+const DUREE_APPAIRAGE_MS = 23 * 3600 * 1000;
 
 /* Rubriques réellement synchronisées : ce qui décrit le potager.
    Les réglages propres à l'appareil (notifications, lieu météo,
@@ -267,7 +269,20 @@ async function creerCodeAppairage() {
       <p class="code-potager code-long">${esc(jeton)}</p>
       <div class="modale-actions"><button class="bouton" onclick="fermerModale()">Terminé</button></div>`);
   } catch (e) {
-    alert("Impossible de créer le code : " + (e.code || e.message));
+    const code = e.code || "";
+    const aide = code.includes("permission-denied")
+      ? `<p>Firebase a refusé l'écriture. Dans presque tous les cas, c'est que les
+         <strong>règles de sécurité</strong> ne sont pas à jour : ouvre la console Firebase →
+         Firestore Database → onglet <strong>Règles</strong>, recolle le contenu du fichier
+         <strong>firestore.rules</strong> puis clique sur <strong>Publier</strong>.</p>`
+      : code.includes("unavailable")
+        ? `<p>Firebase est injoignable : vérifie ta connexion internet, puis réessaie.</p>`
+        : `<p>Vérifie ta connexion et la configuration Firebase.</p>`;
+
+    ouvrirModale("Impossible de créer le code", `
+      ${aide}
+      <p class="note">Message technique : <strong>${esc(e.code || e.message)}</strong></p>
+      <div class="modale-actions"><button class="bouton" onclick="fermerModale()">D'accord</button></div>`);
   }
 }
 
