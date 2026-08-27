@@ -1,16 +1,18 @@
 /* Service worker — permet d'utiliser l'application hors connexion */
 
-const CACHE = "potager-v1";
+const CACHE = "potager-v1.1";
 
 const FICHIERS = [
   "index.html",
   "styles.css",
   "app.js",
+  "planning.js",
   "vues.js",
   "data-legumes.js",
   "data-aromatiques.js",
   "data-medicinales.js",
   "data-permaculture.js",
+  "data-nouveautes.js",
   "manifest.webmanifest",
   "icon-192.png",
   "icon-512.png"

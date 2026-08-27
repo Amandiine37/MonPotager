@@ -206,8 +206,16 @@ function barreFiltres(nomVariable, valeurs) {
     </div>`;
 }
 
+/* Retrouve l'objet de filtre à partir de son nom (résolu à l'appel, donc
+   indépendant de l'ordre de chargement des fichiers) */
+function objetFiltre(nom) {
+  if (nom === "filtreCalendrier") return filtreCalendrier;
+  if (nom === "filtrePicker") return filtrePicker;
+  return filtrePlantes;
+}
+
 function majFiltre(nomVariable, cle, valeur) {
-  const cible = nomVariable === "filtreCalendrier" ? filtreCalendrier : filtrePlantes;
+  const cible = objetFiltre(nomVariable);
   cible[cle] = valeur;
   afficher();
   if (cle === "q") {
@@ -216,17 +224,34 @@ function majFiltre(nomVariable, cle, valeur) {
   }
 }
 
+/* Filtre alphabétique réutilisable.
+   fonctionMaj : nom de la fonction à rappeler après clic ("afficher" par défaut) */
+function barreAlphabet(nomVariable, valeurs, fonctionMaj) {
+  const maj = fonctionMaj || "afficher";
+  const lettreActive = valeurs.lettre || "";
+  const bouton = (lettre, libelle, dispo) => `
+    <button type="button" class="lettre ${lettreActive === lettre ? "actif" : ""} ${dispo ? "" : "lettre-vide"}"
+            ${dispo ? "" : "disabled"}
+            onclick="objetFiltre('${nomVariable}').lettre='${lettre}';${maj}()">${libelle}</button>`;
+
+  return `
+    <div class="alphabet" role="group" aria-label="Filtrer par première lettre">
+      ${bouton("", "Tout", true)}
+      ${ALPHABET.map(l => bouton(l, l, !!LETTRES_DISPONIBLES[l])).join("")}
+    </div>`;
+}
+
 /* ============================================================
    PLANTES (liste + fiche détaillée)
    ============================================================ */
 
-let filtrePlantes = { cat: "toutes", q: "", mois: 0 };
+let filtrePlantes = { cat: "toutes", q: "", mois: 0, lettre: "" };
 
 function vuePlantes(idPlante) {
   if (idPlante && PLANTE_PAR_ID[idPlante]) return fichePlante(PLANTE_PAR_ID[idPlante]);
 
   const moisFiltre = Number(filtrePlantes.mois) || null;
-  const liste = chercherPlantes(filtrePlantes.q, filtrePlantes.cat, moisFiltre, null);
+  const liste = chercherPlantes(filtrePlantes.q, filtrePlantes.cat, moisFiltre, null, filtrePlantes.lettre);
 
   const cartes = liste.map(p => {
     const actes = moisFiltre ? actionsDuMois(p, moisFiltre) : actionsDuMois(p, moisCourant());
@@ -247,10 +272,12 @@ function vuePlantes(idPlante) {
   return `
     <header class="entete">
       <h1>Les plantes</h1>
-      <p class="sous-titre">${liste.length} fiche${liste.length > 1 ? "s" : ""} sur ${PLANTES.length}</p>
+      <p class="sous-titre">${liste.length} fiche${liste.length > 1 ? "s" : ""} sur ${PLANTES.length}${filtrePlantes.lettre ? ` · lettre ${filtrePlantes.lettre}` : ""}</p>
     </header>
 
     ${barreFiltres("filtrePlantes", filtrePlantes)}
+
+    ${barreAlphabet("filtrePlantes", filtrePlantes)}
 
     <div class="filtre-mois">
       <label>Filtrer par mois d'intervention
@@ -850,8 +877,35 @@ function vuePermaculture() {
 const VUES = {
   accueil: vueAccueil,
   calendrier: vueCalendrier,
+  planning: (arg) => vuePlanning(arg),
   plantes: vuePlantes,
   potager: vuePotager,
   taches: vueTaches,
   permaculture: vuePermaculture
 };
+
+/* ============================================================
+   CLOCHE DES NOUVEAUTÉS
+   ============================================================ */
+
+function ouvrirNouveautes() {
+  const nonLues = nouveautesNonLues();
+  const corps = NOUVEAUTES.map((n, i) => `
+    <div class="nouveaute ${i < nonLues ? "nouveaute-neuve" : ""}">
+      <div class="nouveaute-tete">
+        <h4>${esc(n.titre)}</h4>
+        <span class="nouveaute-version">v${esc(n.version)} · ${dateFr(n.date)}${i < nonLues ? ' <span class="badge">nouveau</span>' : ""}</span>
+      </div>
+      <ul class="liste-nouveautes">
+        ${n.points.map(p => `<li><span class="nouveaute-emoji">${p.emoji}</span><span>${p.texte}</span></li>`).join("")}
+      </ul>
+    </div>`).join("");
+
+  ouvrirModale("Quoi de neuf ?", `
+    ${corps}
+    <div class="modale-actions">
+      <button class="bouton" onclick="fermerModale()">J'ai vu</button>
+    </div>`);
+
+  marquerNouveautesLues();
+}

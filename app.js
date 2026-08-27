@@ -33,7 +33,14 @@ const etatVide = () => ({
   cultures: [],
   taches: [],
   favoris: [],
-  reglages: { notifs: false, dernierRappel: "" }
+  planning: [],
+  meteo: {
+    journal: [],
+    gelPrintemps: "05-15",   // Saints de Glace
+    gelAutomne: "11-05",
+    decalage: 0
+  },
+  reglages: { notifs: false, dernierRappel: "", anneePlanning: 0, derniereNouveauteVue: "" }
 });
 
 let etat = charger();
@@ -43,8 +50,10 @@ function charger() {
     const brut = localStorage.getItem(CLE_STOCKAGE);
     if (!brut) return etatVide();
     const donnees = JSON.parse(brut);
-    return Object.assign(etatVide(), donnees, {
-      reglages: Object.assign(etatVide().reglages, donnees.reglages || {})
+    const base = etatVide();
+    return Object.assign(base, donnees, {
+      reglages: Object.assign(base.reglages, donnees.reglages || {}),
+      meteo: Object.assign(base.meteo, donnees.meteo || {})
     });
   } catch (e) {
     console.warn("Données illisibles, réinitialisation.", e);
@@ -118,6 +127,22 @@ function sansAccents(s) {
   return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 }
 
+/* Première lettre d'un nom, sans accent et en majuscule (Œillet -> O, Épinard -> E) */
+function premiereLettre(nom) {
+  const s = sansAccents(nom).replace(/^[^a-zœ]+/, "");
+  const c = (s[0] || "").toUpperCase();
+  return c === "Œ" ? "O" : c;
+}
+
+/* Lettres réellement présentes dans la bibliothèque, pour griser les autres */
+const LETTRES_DISPONIBLES = (() => {
+  const set = {};
+  PLANTES.forEach(p => { set[premiereLettre(p.nom)] = true; });
+  return set;
+})();
+
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
 function plantesDuMois(mois, cle) {
   return PLANTES.filter(p => (p[cle] || []).includes(mois));
 }
@@ -126,11 +151,12 @@ function actionsDuMois(plante, mois) {
   return ORDRE_ACTIONS.filter(cle => (plante[cle] || []).includes(mois));
 }
 
-function chercherPlantes(texte, categorie, filtreMois, filtreAction) {
+function chercherPlantes(texte, categorie, filtreMois, filtreAction, lettre) {
   const q = sansAccents(texte);
   return PLANTES.filter(p => {
     if (categorie && categorie !== "toutes" && p.cat !== categorie) return false;
     if (categorie === "medicinales-utiles" && !p.med) return false;
+    if (lettre && premiereLettre(p.nom) !== lettre) return false;
     if (filtreMois && filtreAction) {
       if (!(p[filtreAction] || []).includes(filtreMois)) return false;
     } else if (filtreMois) {
@@ -361,7 +387,30 @@ function importerDonnees(fichier) {
 
 /* ---------------- Navigation ---------------- */
 
-const PAGES = ["accueil", "calendrier", "plantes", "potager", "taches", "permaculture"];
+const PAGES = ["accueil", "calendrier", "planning", "plantes", "potager", "taches", "permaculture"];
+
+/* ---------------- Cloche des nouveautés ---------------- */
+
+function nouveautesNonLues() {
+  const vue = etat.reglages.derniereNouveauteVue;
+  if (!vue) return NOUVEAUTES.length;
+  const index = NOUVEAUTES.findIndex(n => n.version === vue);
+  return index < 0 ? NOUVEAUTES.length : index;
+}
+
+function marquerNouveautesLues() {
+  etat.reglages.derniereNouveauteVue = VERSION_ACTUELLE;
+  sauver();
+  majCloche();
+}
+
+function majCloche() {
+  const pastille = document.getElementById("pastille-cloche");
+  if (!pastille) return;
+  const n = nouveautesNonLues();
+  pastille.textContent = n > 9 ? "9+" : String(n);
+  pastille.hidden = n === 0;
+}
 
 function pageCourante() {
   const h = (location.hash || "#accueil").slice(1).split("/")[0];
@@ -384,6 +433,7 @@ function afficher() {
   conteneur.innerHTML = VUES[page](argumentPage());
   conteneur.scrollTop = 0;
   window.scrollTo(0, 0);
+  majCloche();
 }
 
 window.addEventListener("hashchange", afficher);

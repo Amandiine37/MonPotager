@@ -44,8 +44,93 @@ a { color: var(--vert); }
 .contenu {
   max-width: 860px;
   margin: 0 auto;
-  padding: 18px 16px calc(96px + env(safe-area-inset-bottom));
+  padding: 14px 16px calc(96px + env(safe-area-inset-bottom));
 }
+
+/* ---------------- Barre du haut + cloche ---------------- */
+
+.barre-appli {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 16px calc(8px + env(safe-area-inset-top));
+  background: rgba(247, 246, 241, .95);
+  border-bottom: 1px solid var(--bordure);
+  backdrop-filter: blur(8px);
+}
+.barre-titre {
+  font-weight: 700;
+  color: var(--vert-fonce);
+  text-decoration: none;
+  font-size: .95rem;
+  letter-spacing: -.01em;
+}
+.cloche {
+  position: relative;
+  background: none;
+  border: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+.cloche:hover { background: var(--vert-pale); }
+.pastille-cloche {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--rouge);
+  color: #fff;
+  border-radius: 999px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  font-size: .66rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pastille-cloche[hidden] { display: none; }
+
+.nouveaute { border-bottom: 1px solid var(--bordure); padding-bottom: 14px; margin-bottom: 14px; }
+.nouveaute:last-of-type { border-bottom: 0; }
+.nouveaute-tete { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; justify-content: space-between; }
+.nouveaute-tete h4 { margin: 0; font-size: 1rem; color: var(--vert-fonce); }
+.nouveaute-version { font-size: .78rem; color: var(--texte-doux); }
+.nouveaute-neuve { background: var(--soleil-pale); border-radius: 12px; padding: 12px 14px; border-bottom: 0; }
+.liste-nouveautes { list-style: none; margin: 10px 0 0; padding: 0; }
+.liste-nouveautes li { display: flex; gap: 10px; margin-bottom: 9px; font-size: .92rem; }
+.nouveaute-emoji { flex: 0 0 auto; font-size: 1.05rem; }
+
+/* ---------------- Alphabet ---------------- */
+
+.alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+.lettre {
+  min-width: 30px;
+  padding: 5px 6px;
+  background: #fff;
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--texte-doux);
+  cursor: pointer;
+}
+.lettre:hover:not(:disabled) { background: var(--vert-pale); }
+.lettre.actif { background: var(--vert); color: #fff; border-color: var(--vert); }
+.lettre-vide { opacity: .3; cursor: default; }
 
 /* ---------------- En-têtes ---------------- */
 
@@ -506,19 +591,200 @@ a { color: var(--vert); }
 }
 .nav-item {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 8px 2px 7px;
-  font-size: .68rem;
+  gap: 1px;
+  padding: 7px 1px 6px;
+  font-size: .61rem;
   text-decoration: none;
   color: var(--texte-doux);
   font-weight: 600;
+  letter-spacing: -.02em;
+  white-space: nowrap;
 }
-.nav-emoji { font-size: 1.2rem; line-height: 1.1; }
+.nav-emoji { font-size: 1.15rem; line-height: 1.1; }
 .nav-item.actif { color: var(--vert); }
 .nav-item.actif .nav-emoji { transform: translateY(-1px); }
+
+/* ---------------- Planning ---------------- */
+
+.planning-tete { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.selecteur-annee {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #fff;
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  padding: 2px 4px;
+  flex: 0 0 auto;
+}
+.selecteur-annee span { font-weight: 700; color: var(--vert-fonce); min-width: 44px; text-align: center; }
+
+.astuce-clic { background: var(--vert-pale); border-radius: 10px; padding: 8px 12px; margin-bottom: 10px !important; }
+
+.ligne-planning .cal-nom { flex-basis: 46%; padding: 0; }
+.ligne-annulee { opacity: .45; }
+.plan-titre {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 7px 9px;
+  color: inherit;
+  min-width: 0;
+}
+.plan-titre:hover { background: var(--vert-pale); }
+.plan-nom-texte { display: flex; flex-direction: column; min-width: 0; }
+.plan-nom-texte strong { font-size: .86rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plan-meta { font-size: .72rem; color: var(--texte-doux); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.statut-point { margin-right: 4px; font-size: .8rem; }
+.st-prevu { color: var(--texte-doux); }
+.st-encours { color: var(--soleil); }
+.st-fait { color: var(--vert-clair); }
+.st-annule { color: var(--rouge); }
+
+.cal-marque.marque-faite { box-shadow: inset 0 0 0 2px #fff; opacity: .55; }
+.cal-case { cursor: pointer; }
+
+.charge-graphe {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  align-items: end;
+  height: 90px;
+  margin-top: 8px;
+}
+.charge-colonne { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; border-radius: 5px; }
+.charge-barre { background: var(--vert-clair); border-radius: 4px 4px 0 0; min-height: 2px; }
+.charge-nombre { text-align: center; font-size: .62rem; color: var(--texte-doux); font-weight: 700; }
+.charge-legende { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; margin-top: 3px; }
+.charge-legende span { text-align: center; font-size: .66rem; color: var(--texte-doux); }
+
+.carte-mois { padding: 0; overflow: hidden; }
+.mois-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 13px 16px;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--vert-fonce);
+  font-weight: 600;
+}
+.mois-tete:hover { background: var(--vert-pale); }
+.mois-compte { font-size: .82rem; color: var(--texte-doux); font-weight: 600; display: flex; gap: 8px; align-items: center; }
+.chevron { font-size: .75rem; }
+.carte-mois.ouverte .liste-taches,
+.carte-mois.ouverte .travaux-mois { padding: 0 16px 14px; }
+.carte-mois.ouverte .rien { padding: 0 16px 10px; display: block; }
+.travaux-mois { border-top: 1px dashed var(--bordure); padding-top: 12px !important; }
+.travaux-mois h4 { margin: 0 0 6px; font-size: .9rem; color: var(--vert-fonce); }
+.travaux-mois li { font-size: .88rem; color: var(--texte-doux); }
+
+.deux-colonnes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.decalage-boutons { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.liste-observations { list-style: none; margin: 12px 0 0; padding: 0; }
+.observation { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--bordure); }
+.obs-emoji { font-size: 1.15rem; line-height: 1.3; }
+.obs-texte { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+
+/* Sélecteur de plante */
+.picker-liste { max-height: 46vh; overflow-y: auto; margin-top: 6px; border-top: 1px solid var(--bordure); }
+.picker-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--bordure);
+  padding: 10px 6px;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+.picker-item:hover:not(:disabled) { background: var(--vert-pale); }
+.picker-texte { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.picker-texte strong { font-size: .92rem; }
+.picker-signe { font-size: 1.1rem; color: var(--vert); font-weight: 700; }
+.picker-deja { opacity: .45; cursor: default; }
+.picker-deja .picker-signe { color: var(--vert-clair); }
+
+/* Éditeur de périodes */
+.edit-grille { display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px; }
+.edit-ligne { display: flex; flex-direction: column; gap: 4px; }
+.edit-label { font-size: .78rem; font-weight: 700; border-radius: 6px; padding: 3px 8px; align-self: flex-start; }
+.edit-mois { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+.edit-case {
+  padding: 9px 0;
+  border: 1px solid var(--bordure);
+  border-radius: 7px;
+  background: #fff;
+  font-family: inherit;
+  font-size: .72rem;
+  font-weight: 700;
+  color: #b9b8b0;
+  cursor: pointer;
+}
+.edit-case:hover { border-color: var(--vert-clair); }
+.edit-reference { border-style: dashed; border-color: var(--vert-clair); color: var(--vert-clair); background: #fbfdfa; }
+.edit-actif { color: #fff !important; border-color: transparent; }
+.edit-actif.act-sa { background: var(--soleil); }
+.edit-actif.act-sp { background: var(--vert-clair); }
+.edit-actif.act-pl { background: var(--terre); }
+.edit-actif.act-re { background: var(--rouge); }
+.edit-fait { box-shadow: inset 0 0 0 2px #fff; }
+.exemple-case { display: inline-block; padding: 0 6px; font-size: .7rem; vertical-align: middle; cursor: default; }
+
+.liste-recoltes { list-style: none; margin: 8px 0; padding: 0; }
+.liste-recoltes li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-top: 1px solid var(--bordure);
+  font-size: .9rem;
+}
+
+.bouton-danger {
+  background: #fff;
+  border: 1px solid var(--rouge);
+  color: var(--rouge);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.bouton-danger:hover { background: var(--rouge-pale); }
+.modale-actions-reparties { justify-content: space-between; }
+
+@media (max-width: 560px) {
+  /* Grille des mois sur 2 rangées : cases assez grandes pour le doigt */
+  .edit-mois { grid-template-columns: repeat(6, 1fr); gap: 5px; }
+  .edit-case { padding: 13px 0; font-size: .78rem; }
+}
+
+@media (max-width: 460px) {
+  .deux-colonnes { grid-template-columns: 1fr; }
+  .ligne-planning .cal-nom { flex-basis: 50%; }
+}
 
 @media (min-width: 720px) {
   .contenu { padding-top: 26px; }
