@@ -248,7 +248,7 @@ const MEDICINALES = [
   sa:[3,4], sp:[5], pl:[4,5,9], re:[7,8,9],
   expo:"Plein soleil", sol:"Sec, calcaire, très drainé", eau:"Aucun",
   esp:"40 cm", prof:"En surface", lev:"15 jours", cyc:"1 an",
-  amis:["Chou pommé","Vigne"],
+  amis:["Chou pommé","Vigne (raisin de table)"],
   ennemis:["Radis"],
   perma:"Petit arbrisseau bleu extrêmement mellifère, parfait en bordure sèche. Éloigne la piéride du chou et l'altise.",
   conseils:"Taille légère au printemps. Se bouture facilement.",

@@ -16,9 +16,11 @@ const STATUTS_PLANNING = {
 /* Plantes qui ne supportent pas le gel : on alerte si elles sont
    plantées ou semées dehors avant la fin des gelées de printemps. */
 const GEL_SENSIBLES = [
-  "tomate", "aubergine", "poivron", "courgette", "concombre", "melon",
-  "butternut", "potiron", "mais-doux", "basilic", "haricot-nain",
-  "haricot-rame", "pourpier", "verveine-citronnelle", "passiflore"
+  "tomate", "aubergine", "poivron", "courgette", "concombre", "cornichon",
+  "melon", "pasteque", "butternut", "potiron", "mais-doux", "basilic",
+  "haricot-nain", "haricot-rame", "pourpier", "tetragone", "physalis",
+  "poire-de-terre", "verveine-citronnelle", "passiflore", "sauge-ananas",
+  "shiso", "stevia", "sarrasin"
 ];
 
 const TYPES_OBSERVATION = {

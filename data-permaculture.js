@@ -81,9 +81,9 @@ const TRAVAUX = {
 
 /* Rotation des cultures : ordre conseillé sur une même planche */
 const ROTATION = [
-  { ordre:1, groupe:"Légumes-feuilles (gourmands en azote)", familles:["Brassicacées","Chénopodiacées","Astéracées"],
+  { ordre:1, groupe:"Légumes-feuilles (gourmands en azote)", familles:["Brassicacées","Chénopodiacées","Astéracées","Aizoacées","Portulacacées"],
     exemples:"Choux, épinards, blettes, salades", note:"Se placent juste après un apport de compost ou après des légumineuses." },
-  { ordre:2, groupe:"Légumes-fruits (très gourmands)", familles:["Solanacées","Cucurbitacées"],
+  { ordre:2, groupe:"Légumes-fruits (très gourmands)", familles:["Solanacées","Cucurbitacées","Poacées"],
     exemples:"Tomates, courges, courgettes, poivrons, aubergines", note:"Sol très riche nécessaire. Jamais deux ans de suite au même endroit." },
   { ordre:3, groupe:"Légumes-racines (peu gourmands)", familles:["Apiacées","Amaryllidacées"],
     exemples:"Carottes, panais, poireaux, oignons, ail", note:"Ne jamais mettre de fumier frais avant : les racines fourchent." },

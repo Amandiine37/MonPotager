@@ -361,11 +361,13 @@ a { color: var(--vert); }
   border: 1px solid var(--vert-clair);
   color: var(--vert-fonce);
   border-radius: 8px;
-  padding: 2px 9px;
+  padding: 5px 11px;
+  min-height: 28px;          /* assez haut pour être visé au doigt */
   font-size: .78rem;
   font-family: inherit;
   cursor: pointer;
   margin-left: 6px;
+  vertical-align: middle;
 }
 .mini-bouton:hover { background: var(--vert-clair); color: #fff; }
 

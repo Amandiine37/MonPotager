@@ -10,7 +10,7 @@
    correspondre au VERSION de sw.js et aux ?v=… d'index.html.
    VERSION_ACTUELLE, elle, ne bouge qu'avec les vraies nouveautés. */
 
-const VERSION_APPLI = "2.7";
+const VERSION_APPLI = "2.8";
 
 const NOUVEAUTES = [
 

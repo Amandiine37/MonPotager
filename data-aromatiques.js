@@ -8,7 +8,7 @@ const AROMATIQUES = [
   expo:"Plein soleil, abrité du vent", sol:"Riche, léger, drainé", eau:"Régulier au pied, jamais sur les feuilles",
   esp:"25 cm", prof:"0,5 cm", lev:"7 à 10 jours", cyc:"2 mois",
   amis:["Tomate","Poivron / Piment","Concombre","Aubergine"],
-  ennemis:["Rue","Thym"],
+  ennemis:["Rue officinale","Thym"],
   perma:"Compagnon indispensable de la tomate : il éloigne la mouche blanche et améliore le goût des fruits. Frileux, il meurt au premier froid.",
   conseils:"Pince systématiquement les sommets et les fleurs : la plante se ramifie et produit 3 fois plus. Récolte le matin.",
   med:{ partie:"Feuilles fraîches", bienfaits:["Digestion difficile","Ballonnements","Nervosité, spasmes","Léger antibactérien"],
