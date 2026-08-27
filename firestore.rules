@@ -43,6 +43,20 @@ service cloud.firestore {
         && appairage(jeton).expireLe > request.time.toMillis();
     }
 
+    // ---------- retours des utilisateurs (idées, bugs) ----------
+    // Chacun peut en déposer un, PERSONNE ne peut les relire depuis
+    // l'application : ils se consultent dans la console Firebase.
+
+    match /retours/{ligne} {
+      allow read: if false;
+      allow create: if connecte()
+                    && request.resource.data.titre is string
+                    && request.resource.data.titre.size() > 0
+                    && request.resource.data.titre.size() <= 150
+                    && request.resource.data.detail.size() <= 2000;
+      allow update, delete: if false;
+    }
+
     // ---------- codes d'appairage ----------
     // Le jeton est un code aléatoire à usage unique, valable 24 h.
     // On ne peut jamais LISTER les jetons, seulement en ouvrir un précis.

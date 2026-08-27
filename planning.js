@@ -655,7 +655,7 @@ function contenuPicker() {
     <input class="champ-recherche" type="search" placeholder="Rechercher une plante…" value="${esc(filtrePicker.q)}"
            oninput="filtrePicker.q=this.value;majPicker(true)">
     <div class="onglets">
-      ${[["toutes", "Toutes"], ["legume", "🥕"], ["fruit", "🍓"], ["aromatique", "🌿"], ["medicinale", "🌼"]].map(([v, l]) =>
+      ${[["toutes", "Toutes"], ["legume", "🥕"], ["fruit", "🍓"], ["aromatique", "🌿"], ["medicinale", "🌼"], ["engrais", "🌾"]].map(([v, l]) =>
         `<button type="button" class="onglet ${filtrePicker.cat === v ? "actif" : ""}" onclick="filtrePicker.cat='${v}';majPicker()">${l}</button>`).join("")}
     </div>
     ${barreAlphabet("filtrePicker", filtrePicker, "majPicker")}

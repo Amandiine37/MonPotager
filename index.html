@@ -9,12 +9,12 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="stylesheet" href="styles.css?v=2.0">
+<link rel="stylesheet" href="styles.css?v=2.4">
 </head>
 <body>
 
 <header class="barre-appli">
-  <a class="barre-titre" href="#accueil">🌱 Mon Potager</a>
+  <a class="barre-titre" href="#accueil">🌱 Mon Potager<span class="badge badge-beta">bêta</span></a>
   <div class="barre-actions">
     <button class="meteo-barre" id="meteo-barre" onclick="ouvrirMeteoRapide()" aria-label="Météo du potager" title="Météo">🌦️</button>
     <button class="cloche" onclick="ouvrirNouveautes()" aria-label="Nouveautés de l'application" title="Quoi de neuf ?">
@@ -41,21 +41,24 @@
 <!-- Le ?v=… force le navigateur à retélécharger les fichiers après une mise à jour.
      Sans lui, il peut garder un ancien fichier et une nouveauté semble ne pas marcher.
      À incrémenter à chaque livraison, en même temps que CACHE dans sw.js. -->
-<script src="firebase-config.js?v=2.0"></script>
-<script src="data-legumes.js?v=2.0"></script>
-<script src="data-fruits.js?v=2.0"></script>
-<script src="data-aromatiques.js?v=2.0"></script>
-<script src="data-medicinales.js?v=2.0"></script>
-<script src="data-permaculture.js?v=2.0"></script>
-<script src="data-besoins.js?v=2.0"></script>
-<script src="data-nouveautes.js?v=2.0"></script>
-<script src="app.js?v=2.0"></script>
-<script src="planning.js?v=2.0"></script>
-<script src="meteo.js?v=2.0"></script>
-<script src="autonomie.js?v=2.0"></script>
-<script src="plan.js?v=2.0"></script>
-<script src="sauvegarde.js?v=2.0"></script>
-<script src="sync.js?v=2.0"></script>
-<script src="vues.js?v=2.0"></script>
+<script src="firebase-config.js?v=2.4"></script>
+<script src="data-hauteurs.js?v=2.4"></script>
+<script src="data-sol.js?v=2.4"></script>
+<script src="data-legumes.js?v=2.4"></script>
+<script src="data-fruits.js?v=2.4"></script>
+<script src="data-aromatiques.js?v=2.4"></script>
+<script src="data-medicinales.js?v=2.4"></script>
+<script src="data-engrais-verts.js?v=2.4"></script>
+<script src="data-permaculture.js?v=2.4"></script>
+<script src="data-besoins.js?v=2.4"></script>
+<script src="data-nouveautes.js?v=2.4"></script>
+<script src="app.js?v=2.4"></script>
+<script src="planning.js?v=2.4"></script>
+<script src="meteo.js?v=2.4"></script>
+<script src="autonomie.js?v=2.4"></script>
+<script src="plan.js?v=2.4"></script>
+<script src="sauvegarde.js?v=2.4"></script>
+<script src="sync.js?v=2.4"></script>
+<script src="vues.js?v=2.4"></script>
 </body>
 </html>

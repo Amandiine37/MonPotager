@@ -29,10 +29,10 @@ fonctionne sans connexion internet.
 | **Planning** | **Ton** calendrier de plantation de l'année : tu choisis tes plantes, tu ajustes les mois, tu suis tes récoltes. |
 | **Autonomie** | Tes récoltes comparées aux besoins de ton foyer, avec des jauges qui se remplissent. |
 | **Calendrier** | Le calendrier de référence : les 12 mois de toutes les plantes de la bibliothèque, sans rien de personnel. |
-| **Plantes** | 107 fiches détaillées (légumes, fruits, aromatiques, médicinales) : culture, associations, rotation, conseils permaculture, propriétés médicinales. |
+| **Plantes** | 148 fiches détaillées (légumes, fruits, aromatiques, médicinales, engrais verts) : culture, associations, rotation, conseils permaculture, propriétés médicinales. |
 | **Potager** | Le **plan** dessiné de ta parcelle où tu places tes plantes, et tes planches avec ce que tu y as semé. |
 | **Rappels** | Les tâches à faire, créées automatiquement à partir de tes cultures ou ajoutées à la main. |
-| **Perma** | Principes, travaux mois par mois, rotation des cultures sur 4 ans, recettes de purins et décoctions. |
+| **Perma** | Principes, **le sol** (le connaître, l'améliorer, les gestes), travaux du mois, rotation, purins. |
 
 > **Calendrier ou Planning ?** *Calendrier* ne change jamais : c'est le savoir de référence.
 > *Planning* est à toi : il part du calendrier de référence, puis tu le modifies comme tu veux.
@@ -96,7 +96,40 @@ surfaces restent exactes.
 
 **Planter.** La palette reprend automatiquement les plantes de ton planning, de tes cultures et
 de tes favorites — plus un bouton pour en piocher d'autres dans la bibliothèque. Chaque plante
-reçoit sa couleur. Tu touches les cases pour les peindre.
+reçoit une couleur, **figée à sa première utilisation** et mémorisée dans le plan.
+
+**Ensoleillement.** L'outil ☀️ sert à marquer les coins ombragés — pied d'un mur, ombre d'une
+haie ou d'un arbre. Trois niveaux : plein soleil (le défaut), mi-ombre, ombre. Tant que l'outil
+est actif, le plan affiche l'ensoleillement au lieu des plantes ; le reste du temps, les cases
+ombragées portent un petit coin de couleur.
+
+L'appli lit l'exposition demandée dans chaque fiche et signale les erreurs :
+
+> *Maïs doux — a besoin de soleil ; à l'ombre, pas de récolte.*
+> *Menthe poivrée — préfère la mi-ombre ; au plein soleil, montée en graine ou feuilles brûlées.*
+
+Ces cases sont **hachurées de bleu**, et une case mal exposée n'est **jamais** proposée par
+« Où planter ? », même entourée de bonnes compagnes.
+
+**L'ombre portée des plantes hautes.** Une plante de 1,50 m ou plus projette son ombre
+**vers le nord** — d'où le réglage « Où est le nord ? » dans les paramètres du plan. L'appli
+calcule cette ombre — **0,6 fois la hauteur de la plante**, ce qui correspond au soleil français
+de mi-saison — la dessine en hachures grises, et en tire des conseils dans les deux sens :
+
+- *erreur* — « Tomate — réclame le plein soleil ; à mi-ombre, la récolte sera maigre.
+  Ici, l'ombre vient de Maïs doux. »
+- *bon coup* — « Laitue profite de l'ombre de Maïs doux. »
+- *occasion manquée* — « 3 cases sont à l'ombre du maïs et restent libres. C'est exactement là
+  qu'il faut mettre les plantes qui souffrent de la chaleur — salades, épinards, mâche. »
+
+Les hauteurs sont dans `data-hauteurs.js`, une ligne par plante.
+
+**Besoin en eau.** Le panneau 💧 donne la surface occupée par chaque niveau d'arrosage — les
+regrouper, c'est moins d'arrosage et moins de gaspillage — et alerte quand deux voisines ont des
+besoins opposés (*Céleri branche ↔ Thym* : l'un sera noyé, l'autre assoiffé).
+
+Exposition et arrosage sont **déduits du texte des fiches**, pas saisis en double : les 148
+plantes sont classées automatiquement, sans double saisie qui finirait par diverger.
 
 **Les conseils, pendant que tu dessines :**
 
@@ -105,7 +138,10 @@ reçoit sa couleur. Tu touches les cases pour les peindre.
 | Case bordée de **rouge** | Deux voisines qui ne s'entendent pas se touchent |
 | Case bordée d'**orange** | Emplacement conseillé pour la plante sélectionnée (bouton ✨ « Où planter ? ») |
 | Panneau 🤝 | Les bonnes associations déjà en place |
-| Panneau 🔄 | Une famille revient à l'emplacement qu'elle occupait sur le plan de l'an dernier |
+| Case bordée de **brun pointillé** | Terre cultivée sans repos depuis 4 ans, ou famille revenue trop tôt |
+| Case hachurée de **bleu** | Exposition inadaptée à la plante qui s'y trouve |
+| **Coin de couleur** en haut à droite | La case est en mi-ombre ou à l'ombre |
+| Panneau 🔄 | Rotation sur 4 ans et repos de la terre (voir plus bas) |
 | Panneau 💡 | Les plantes qui manquent, d'après ce que tu as déjà posé |
 
 Le score d'un emplacement compte +2 par voisine amie, −3 par voisine ennemie, +1 pour regrouper
@@ -116,8 +152,34 @@ chaque fiche. L'outil **👆 Info** détaille une case : ce qu'il y a dessus, se
 qu'elles en pensent.
 
 **D'une année sur l'autre** : le bouton « 📅 Copier pour *année+1* » reprend la forme et les
-dimensions mais **vide les plantations** — c'est voulu, pour repenser la rotation. L'appli
-compare ensuite avec l'année précédente, case par case.
+dimensions mais **vide les plantations** — c'est voulu, pour repenser la rotation.
+
+### Rotation et repos de la terre
+
+L'analyse remonte **tous les plans portant le même nom**, pas seulement l'année précédente.
+Elle applique la règle des **4 ans** avant qu'une famille revienne au même endroit, et te donne
+l'année à laquelle l'emplacement redeviendra libre.
+
+Trois signaux :
+
+- **Famille revenue trop tôt** — « Solanacées : déjà à cet endroit en 2024, soit 2 ans d'écart
+  au lieu de 4. Cet emplacement ne sera libre qu'en 2028. »
+- **Même type de culture deux ans de suite** — deux gourmandes ou deux racines qui se succèdent
+  puisent les mêmes éléments, même quand les familles diffèrent. S'appuie sur les 4 groupes de
+  rotation de l'écran Perma.
+- **Terre jamais mise au repos** — après 4 ans de culture continue sans repos ni engrais vert,
+  les cases concernées se marquent d'un **liseré brun** sur le plan.
+
+**Le repos se pose comme une plante.** Sous la palette, deux éléments : 🍂 *Repos (sol paillé)*
+et 🌾 *Engrais vert*. Ce ne sont pas des cultures — ils n'entrent ni dans les associations, ni
+dans le décompte des plants — mais ils comptent dans l'historique de la case. Cultiver juste
+après un engrais vert est signalé comme un bon coup, et c'est là qu'il faut mettre les plus
+gourmandes.
+
+Les **vivaces sont exemptées** de rotation : leur place est de rester.
+
+L'outil **👆 Info** affiche le passé complet d'une case, année par année, avec la mention
+« même famille ⚠️ » et la date du dernier repos.
 
 ## L'autosuffisance
 
@@ -284,13 +346,14 @@ GitHub Pages, tu repartiras d'un potager vide. Utilise **Exporter / Importer**
 
 ## Contenu de la base
 
-- **43 légumes** (dont capucine et œillet d'Inde, les fleurs compagnes)
+- **63 légumes** (dont les perpétuels : chou Daubenton, poireau perpétuel, oignon rocambole, chénopode Bon-Henri)
 - **20 fruits** : fruits du potager (fraisier, melon, pastèque, physalis, rhubarbe), petits fruits (framboisier, groseilliers, cassissier, mûrier, myrtillier, vigne, kiwaï, noisetier) et fruitiers (pommier, poirier, prunier, cerisier, pêcher, figuier)
-- **20 aromatiques**
-- **25 plantes médicinales**
+- **28 aromatiques**
+- **31 plantes médicinales**
 - **72 mois de travaux** répartis sur l'année
 - **6 recettes** de purins et décoctions maison
-- **63 légumes et fruits** avec besoins annuels et rendements, pour le calcul d'autosuffisance
+- **6 engrais verts** : phacélie, moutarde, seigle, vesce, trèfle incarnat, sarrasin
+- **83 légumes et fruits** avec besoins annuels et rendements, pour le calcul d'autosuffisance
 
 ## Annoncer une nouveauté dans la cloche
 
@@ -315,7 +378,10 @@ plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'
 | `vues.js` | Affichage des écrans et des formulaires |
 | `data-legumes.js` · `data-fruits.js` · `data-aromatiques.js` · `data-medicinales.js` | Base de connaissances des plantes, un fichier par catégorie |
 | `data-permaculture.js` | Travaux du mois, rotation, préparations, principes |
+| `data-engrais-verts.js` | Les 6 engrais verts, catégorie à part |
 | `data-besoins.js` | Besoins annuels par adulte, rendements au m², poids moyens |
+| `data-hauteurs.js` | Hauteur adulte de chaque plante, pour l'ombre portée |
+| `data-sol.js` | Tests de sol, types de terre, gestes et calendrier du sol |
 | `data-nouveautes.js` | Le contenu de la cloche 🔔 |
 | `sw.js` · `manifest.webmanifest` | Fonctionnement hors connexion et installation |
 | `make_icons.py` | Regénère les icônes (`python make_icons.py`) |

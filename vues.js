@@ -201,7 +201,8 @@ function barreFiltres(nomVariable, valeurs) {
     ["legume", "🥕 Légumes"],
     ["fruit", "🍓 Fruits"],
     ["aromatique", "🌿 Aromatiques"],
-    ["medicinale", "🌼 Médicinales"]
+    ["medicinale", "🌼 Médicinales"],
+    ["engrais", "🌾 Engrais verts"]
   ];
   return `
     <div class="filtres">
@@ -761,6 +762,8 @@ function blocNotifications() {
         : `<button class="bouton" onclick="demanderNotifications()">Activer les notifications</button>`}
     </div>
 
+    ${carteBeta()}
+
     ${carteSynchronisation()}
 
     ${carteSauvegarde()}`;
@@ -840,6 +843,7 @@ let ongletPerma = "principes";
 function vuePermaculture() {
   const onglets = [
     ["principes", "Principes"],
+    ["sol", "🪱 Le sol"],
     ["travaux", "Travaux du mois"],
     ["rotation", "Rotation"],
     ["preparations", "Purins & décoctions"]
@@ -854,6 +858,8 @@ function vuePermaculture() {
         <p>${esc(p.texte)}</p>
       </div>`).join("");
   }
+
+  if (ongletPerma === "sol") contenu = vueSol();
 
   if (ongletPerma === "travaux") {
     contenu = MOIS.map((m, i) => `
@@ -900,6 +906,73 @@ function vuePermaculture() {
     </div>
     ${contenu}
   `;
+}
+
+/* ---------- Le sol ---------- */
+
+let ongletSol = "connaitre";
+
+function vueSol() {
+  const sousOnglets = [
+    ["connaitre", "Connaître ma terre"],
+    ["ameliorer", "L'améliorer"],
+    ["gestes", "Les gestes"],
+    ["quand", "Quand ?"]
+  ];
+
+  let bloc = "";
+
+  if (ongletSol === "connaitre") {
+    bloc = `
+      <div class="carte carte-astuce">
+        <h3>Commence par savoir ce que tu as</h3>
+        <p>On ne change pas la nature d'une terre — on l'améliore et on choisit des plantes qui
+        s'y plaisent. Quatre tests suffisent, sans rien acheter.</p>
+      </div>
+      ${TESTS_SOL.map(t => `
+        <div class="carte">
+          <h3>${t.emoji} ${esc(t.titre)} <span class="badge">${esc(t.duree)}</span></h3>
+          <p>${esc(t.comment)}</p>
+          <h4>Ce que ça dit</h4>
+          <ul class="liste-simple">${t.lecture.map(l => `<li>${l}</li>`).join("")}</ul>
+        </div>`).join("")}`;
+  }
+
+  if (ongletSol === "ameliorer") {
+    bloc = TYPES_SOL.map(s => `
+      <div class="carte">
+        <h3>${s.emoji} ${esc(s.type)}</h3>
+        <p class="note"><strong>On le reconnaît à :</strong> ${esc(s.reconnait)}</p>
+        <div class="info-assoc">👍 ${esc(s.atouts)}</div>
+        <div class="alerte-assoc">👎 ${esc(s.defauts)}</div>
+        <h4>Ce qu'il faut faire</h4>
+        <ul class="liste-simple">${s.faire.map(f => `<li>${esc(f)}</li>`).join("")}</ul>
+      </div>`).join("");
+  }
+
+  if (ongletSol === "gestes") {
+    bloc = GESTES_SOL.map(g => `
+      <div class="carte">
+        <h3>${g.emoji} ${esc(g.titre)} <span class="badge">${esc(g.niveau)}</span></h3>
+        <p>${esc(g.texte)}</p>
+        <div class="encart-pratique"><strong>En pratique</strong><p>${g.pratique}</p></div>
+      </div>`).join("");
+  }
+
+  if (ongletSol === "quand") {
+    bloc = Object.keys(CALENDRIER_SOL).map(saison => `
+      <div class="carte">
+        <h3>${esc(saison)}</h3>
+        <ul class="liste-simple">${CALENDRIER_SOL[saison].map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      </div>`).join("");
+  }
+
+  return `
+    <div class="onglets onglets-larges">
+      ${sousOnglets.map(([v, l]) =>
+        `<button class="onglet ${ongletSol === v ? "actif" : ""}" onclick="ongletSol='${v}';afficher()">${l}</button>`).join("")}
+    </div>
+    ${bloc}`;
 }
 
 /* ---------- Table des vues ---------- */

@@ -443,6 +443,91 @@ function carteSynchronisation() {
     </div>`;
 }
 
+/* ---------------- Retours : idées et bugs ----------------
+   Déposés dans une collection à part. Personne ne peut les relire depuis
+   l'appli : ils se consultent dans la console Firebase. */
+
+function formulaireRetour(type) {
+  const bug = type === "bug";
+  ouvrirModale(bug ? "Signaler un problème" : "Proposer une idée", `
+    <form onsubmit="envoyerRetour(event,'${bug ? "bug" : "idee"}')">
+      <label>${bug ? "Que s'est-il passé ?" : "Ton idée en une ligne"}
+        <input name="titre" required maxlength="150" autofocus
+               placeholder="${bug ? "Le bouton X ne fait rien" : "Pouvoir noter la météo du jour"}">
+      </label>
+      <label>${bug ? "Détaille : à quel endroit, qu'attendais-tu ?" : "Explique un peu"}
+        <textarea name="detail" rows="5" maxlength="2000"
+                  placeholder="${bug ? "Écran Planning, après avoir cliqué sur…" : "Ça me servirait à…"}"></textarea>
+      </label>
+      <div class="encart-confidentialite">
+        <strong>Ce qui est envoyé</strong>
+        <p>Uniquement ton texte, la version de l'appli et le type d'appareil — rien de ton potager,
+        aucune donnée personnelle. Le message part chez Firebase et n'est lisible que par
+        la personne qui gère l'application.</p>
+      </div>
+      <div class="modale-actions">
+        <button type="button" class="bouton bouton-doux" onclick="fermerModale()">Annuler</button>
+        <button type="submit" class="bouton">Envoyer</button>
+      </div>
+    </form>
+    <div id="resultat-retour"></div>`);
+}
+
+async function envoyerRetour(ev, type) {
+  ev.preventDefault();
+  const f = new FormData(ev.target);
+  const boite = document.getElementById("resultat-retour");
+  boite.innerHTML = `<p class="note">Envoi en cours…</p>`;
+
+  const message = {
+    type: type,
+    titre: f.get("titre").trim().slice(0, 150),
+    detail: (f.get("detail") || "").trim().slice(0, 2000),
+    version: typeof VERSION_ACTUELLE !== "undefined" ? VERSION_ACTUELLE : "?",
+    appareil: navigator.userAgent.slice(0, 200),
+    envoyeLe: Date.now()
+  };
+
+  if (!firebaseConfigure()) {
+    boite.innerHTML = `
+      <div class="alerte-assoc">L'envoi n'est pas configuré sur cette copie de l'application.
+        Copie ton message et transmets-le directement :</div>
+      <textarea rows="5" onclick="this.select()">${esc(message.titre + "\n\n" + message.detail)}</textarea>`;
+    return;
+  }
+
+  try {
+    const fb = await chargerFirebase();
+    await fb.fs.setDoc(fb.fs.doc(fb.base, "retours", nouvelId() + nouvelId()), message);
+    fermerModale();
+    ouvrirModale("Merci 🌱", `
+      <p>${type === "bug" ? "Le problème est signalé." : "L'idée est notée."} Elle sera lue,
+      même si tu ne reçois pas de réponse directe — l'appli ne sait pas te répondre.</p>
+      <div class="modale-actions"><button class="bouton" onclick="fermerModale()">Fermer</button></div>`);
+  } catch (e) {
+    boite.innerHTML = `
+      <div class="alerte-assoc">Envoi impossible (${esc(e.code || e.message)}).
+        ${String(e.code || "").includes("permission-denied")
+          ? "Les règles de sécurité Firebase ne sont pas à jour : recolle le fichier firestore.rules dans la console et publie."
+          : "Vérifie ta connexion, puis réessaie."}</div>`;
+  }
+}
+
+function carteBeta() {
+  return `
+    <div class="carte carte-beta">
+      <h3>🧪 Version bêta <span class="badge badge-beta">bêta</span></h3>
+      <p>Cette application est en construction. Des choses manquent, d'autres se comporteront
+      bizarrement — et c'est en le disant qu'on l'améliore.</p>
+      <div class="barre-boutons">
+        <button class="bouton" onclick="formulaireRetour('idee')">💡 Proposer une idée</button>
+        <button class="bouton bouton-doux" onclick="formulaireRetour('bug')">🐛 Signaler un problème</button>
+      </div>
+      <p class="note">Version actuellement installée : <strong>${typeof VERSION_ACTUELLE !== "undefined" ? esc(VERSION_ACTUELLE) : "?"}</strong>.
+        La cloche 🔔 en haut liste tout ce qui a été ajouté.</p>
+    </div>`;
+}
+
 /* ---------------- Démarrage ---------------- */
 
 function demarrerSync() {

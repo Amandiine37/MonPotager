@@ -4,6 +4,40 @@
 
 const NOUVEAUTES = [
 
+{ version: "2.4", date: "2026-08-27", titre: "41 plantes de plus, dont les engrais verts",
+  points: [
+    { emoji: "🌾", texte: "<strong>Nouvelle catégorie Engrais verts</strong> : phacélie, moutarde, seigle, vesce, trèfle incarnat, sarrasin. Cultivés sur le plan, ils comptent comme un repos de la terre." },
+    { emoji: "🥬", texte: "<strong>20 légumes de plus</strong>, dont les perpétuels qui font le cœur d'un potager permanent : chou Daubenton, poireau perpétuel, oignon rocambole, chénopode Bon-Henri, tétragone, crosne, cardon, salsifis, scorsonère, chervis, poire de terre." },
+    { emoji: "🌿", texte: "<strong>8 aromatiques</strong> : ciboule de Chine, fenouil bronze, sauge ananas, shiso, stévia, népéta, absinthe, rue — avec les avertissements qui s'imposent pour les deux dernières." },
+    { emoji: "🌼", texte: "<strong>7 médicinales</strong> : mélilot, onagre, aigremoine, alchémille, armoise, salicaire, agastache." },
+    { emoji: "🌳", texte: "<strong>L'ombre portée est plus juste</strong> : elle vaut désormais 0,6 fois la hauteur de la plante. Un cerisier de 5 m n'ombre plus comme un figuier." }
+  ] },
+
+{ version: "2.3", date: "2026-08-27", titre: "L'ombre des grandes, et la terre",
+  points: [
+    { emoji: "🌾", texte: "<strong>L'ombre portée</strong> : le maïs, les haricots à rames ou le topinambour projettent leur ombre vers le nord. L'appli la calcule, la dessine en hachures, et te dit d'y mettre les salades plutôt que de les laisser griller." },
+    { emoji: "🧭", texte: "<strong>Où est le nord ?</strong> se règle dans les réglages du plan — c'est ce qui permet de savoir de quel côté tombe l'ombre." },
+    { emoji: "🪱", texte: "<strong>Un onglet « Le sol »</strong> dans Perma : reconnaître sa terre (test du boudin, du bocal, du vinaigre, lecture des herbes), l'améliorer selon son type, les gestes qui la construisent, et quoi faire à chaque saison." },
+    { emoji: "🧪", texte: "<strong>L'appli passe en bêta assumée</strong> : depuis l'écran Rappels, tu peux proposer une idée ou signaler un problème en deux clics." }
+  ] },
+
+{ version: "2.2", date: "2026-08-27", titre: "Soleil, eau, et une couleur qui ne bouge plus",
+  points: [
+    { emoji: "🐞", texte: "<strong>Correction</strong> : la couleur d'une plante sur le plan changeait quand on en ajoutait une autre. Chaque plante garde désormais sa couleur pour de bon." },
+    { emoji: "☀️", texte: "<strong>Nouvel outil Soleil</strong> : marque les coins ombragés de ton potager — mur, haie, arbre. L'appli te prévient si une plante y est mal placée : « la laitue préfère la mi-ombre : au plein soleil elle montera en graine »." },
+    { emoji: "💧", texte: "<strong>Besoin en eau</strong> : la surface occupée par chaque niveau d'arrosage, et une alerte quand deux voisines ont des besoins opposés — l'une sera noyée, l'autre assoiffée." },
+    { emoji: "✨", texte: "<strong>« Où planter ? » tient compte du soleil</strong> : une case mal exposée n'est jamais proposée, même entourée de bonnes compagnes." }
+  ] },
+
+{ version: "2.1", date: "2026-08-27", titre: "Le repos de la terre",
+  points: [
+    { emoji: "🍂", texte: "<strong>Mettre une parcelle au repos</strong> : deux nouveaux éléments dans la palette du plan — <em>repos sous paillage</em> et <em>engrais vert</em>. Ce ne sont pas des cultures, et l'appli les compte comme telles." },
+    { emoji: "🔄", texte: "<strong>La rotation remonte sur toutes les années</strong>, plus seulement la précédente. Elle te dit en quelle année l'emplacement redeviendra libre pour cette famille." },
+    { emoji: "🥕", texte: "<strong>Alerte « même type de culture »</strong> : deux gourmandes ou deux racines qui se suivent puisent les mêmes éléments, même si les familles diffèrent." },
+    { emoji: "🟤", texte: "<strong>Les cases fatiguées</strong> — cultivées sans interruption depuis 4 ans — se marquent d'un liseré brun sur le plan." },
+    { emoji: "📖", texte: "L'outil <strong>👆 Info</strong> raconte le passé d'une case, année par année, et te dit quand elle a été mise au repos pour la dernière fois." }
+  ] },
+
 { version: "2.0", date: "2026-08-27", titre: "Le plan de ton potager",
   points: [
     { emoji: "📐", texte: "<strong>Dessine ta parcelle</strong> dans l'onglet Potager : tu donnes les dimensions, et tu peux <strong>découper</strong> les cases inutiles pour obtenir une forme en L, contourner une allée ou un cabanon. Plusieurs plans possibles." },
