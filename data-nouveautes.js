@@ -4,6 +4,15 @@
 
 const NOUVEAUTES = [
 
+{ version: "2.0", date: "2026-08-27", titre: "Le plan de ton potager",
+  points: [
+    { emoji: "📐", texte: "<strong>Dessine ta parcelle</strong> dans l'onglet Potager : tu donnes les dimensions, et tu peux <strong>découper</strong> les cases inutiles pour obtenir une forme en L, contourner une allée ou un cabanon. Plusieurs plans possibles." },
+    { emoji: "🎨", texte: "<strong>Place tes plantes au doigt</strong> : la palette reprend celles de ton planning, de tes cultures et de tes favorites. Chaque plante a sa couleur." },
+    { emoji: "✨", texte: "<strong>« Où planter ? »</strong> surligne en orange les meilleurs emplacements pour la plante choisie — près de ses amies, loin de ses ennemies." },
+    { emoji: "⚠️", texte: "<strong>Les mauvais voisinages s'entourent de rouge</strong> pendant que tu dessines, avec la liste des paires à séparer. Et l'appli te dit ce qui manque à ton plan." },
+    { emoji: "📊", texte: "<strong>Les surfaces sont calculées</strong> : « 2,25 m² de tomates ≈ 9 plants », d'après l'espacement de chaque fiche." }
+  ] },
+
 { version: "1.9", date: "2026-08-27", titre: "Les fruits arrivent en nombre",
   points: [
     { emoji: "🍓", texte: "<strong>Nouvelle catégorie Fruits</strong> dans l'écran Plantes et dans le planning : les fraises ne sont plus rangées avec les carottes, et le framboisier n'est plus classé en médicinale." },

@@ -4,7 +4,7 @@
    C'est ce qui garantit que le navigateur retélécharge bien tous les fichiers
    au lieu d'en garder d'anciens, ce qui donne des nouveautés qui « ne marchent pas ». */
 
-const VERSION = "1.9";
+const VERSION = "2.0";
 const CACHE = "potager-v" + VERSION;
 
 const FICHIERS = [
@@ -14,6 +14,7 @@ const FICHIERS = [
   "planning.js?v=" + VERSION,
   "meteo.js?v=" + VERSION,
   "autonomie.js?v=" + VERSION,
+  "plan.js?v=" + VERSION,
   "sauvegarde.js?v=" + VERSION,
   "sync.js?v=" + VERSION,
   "firebase-config.js?v=" + VERSION,

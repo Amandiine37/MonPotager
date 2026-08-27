@@ -426,10 +426,27 @@ function clicFavori(id) {
    MON POTAGER
    ============================================================ */
 
+let ongletPotager = "plan";
+
 function vuePotager() {
+  const onglets = [["plan", "📐 Plan"], ["zones", "📋 Mes planches"]];
+  return `
+    <header class="entete">
+      <h1>Mon potager</h1>
+      <p class="sous-titre">${ongletPotager === "plan"
+        ? "Dessine ta parcelle et place tes plantes"
+        : "Ce que tu as semé et planté, planche par planche"}</p>
+    </header>
+    <div class="onglets onglets-larges">
+      ${onglets.map(([v, l]) =>
+        `<button class="onglet ${ongletPotager === v ? "actif" : ""}" onclick="ongletPotager='${v}';afficher()">${l}</button>`).join("")}
+    </div>
+    ${ongletPotager === "plan" ? vuePlan() : vueZones()}`;
+}
+
+function vueZones() {
   if (!etat.zones.length) {
     return `
-      <header class="entete"><h1>Mon potager</h1></header>
       <div class="carte carte-astuce">
         <h3>Commence par créer une zone</h3>
         <p>Une zone, c'est une planche, un carré, une jardinière, une serre… Tu y enregistreras ensuite ce que tu sèmes et ce que tu plantes, et l'appli te préviendra des associations à éviter et de la rotation des cultures.</p>
@@ -482,10 +499,7 @@ function vuePotager() {
   }).join("");
 
   return `
-    <header class="entete">
-      <h1>Mon potager</h1>
-      <p class="sous-titre">${etat.zones.length} zone${etat.zones.length > 1 ? "s" : ""} · ${culturesActives().length} culture${culturesActives().length > 1 ? "s" : ""} en cours</p>
-    </header>
+    <p class="note">${etat.zones.length} zone${etat.zones.length > 1 ? "s" : ""} · ${culturesActives().length} culture${culturesActives().length > 1 ? "s" : ""} en cours</p>
     ${zones}
     <button class="bouton" onclick="formulaireZone()">➕ Nouvelle zone</button>
   `;

@@ -35,6 +35,7 @@ const etatVide = () => ({
   taches: [],
   favoris: [],
   planning: [],
+  plans: [],
   meteo: {
     journal: [],
     gelPrintemps: "05-15",   // Saints de Glace

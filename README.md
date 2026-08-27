@@ -30,7 +30,7 @@ fonctionne sans connexion internet.
 | **Autonomie** | Tes récoltes comparées aux besoins de ton foyer, avec des jauges qui se remplissent. |
 | **Calendrier** | Le calendrier de référence : les 12 mois de toutes les plantes de la bibliothèque, sans rien de personnel. |
 | **Plantes** | 107 fiches détaillées (légumes, fruits, aromatiques, médicinales) : culture, associations, rotation, conseils permaculture, propriétés médicinales. |
-| **Potager** | Tes zones (planches, carrés, serre) et ce que tu y as semé ou planté, avec alertes d'association et de rotation. |
+| **Potager** | Le **plan** dessiné de ta parcelle où tu places tes plantes, et tes planches avec ce que tu y as semé. |
 | **Rappels** | Les tâches à faire, créées automatiquement à partir de tes cultures ou ajoutées à la main. |
 | **Perma** | Principes, travaux mois par mois, rotation des cultures sur 4 ans, recettes de purins et décoctions. |
 
@@ -79,6 +79,45 @@ fonctionne sans connexion internet.
 - **📤 Exporter** : un fichier `.csv` ouvrable dans Excel ou LibreOffice.
 - **Reprendre le planning de l'année précédente** : proposé quand tu passes à l'année suivante
   (les flèches ◀ ▶ à côté de l'année).
+
+## Le plan du potager
+
+Onglet **Potager → 📐 Plan**. Deux sous-onglets : le plan dessiné, et **Mes planches**
+(l'ancienne gestion des zones et cultures, inchangée).
+
+**Tracer la parcelle.** Tu donnes largeur, profondeur et taille des cases (25 cm, 50 cm ou 1 m).
+L'appli en fait une grille dont les cotes sont justes par construction. L'outil **✂️ Découper**
+retire les cases qui ne font pas partie du potager : c'est ainsi qu'on obtient une forme en L,
+qu'on contourne un cabanon ou qu'on réserve une allée. Retoucher une case la remet.
+
+*Pourquoi une grille et pas un dessin libre ?* Un éditeur de polygone au doigt est pénible sur
+téléphone et donne des dimensions approximatives. La grille se manipule d'un doigt et les
+surfaces restent exactes.
+
+**Planter.** La palette reprend automatiquement les plantes de ton planning, de tes cultures et
+de tes favorites — plus un bouton pour en piocher d'autres dans la bibliothèque. Chaque plante
+reçoit sa couleur. Tu touches les cases pour les peindre.
+
+**Les conseils, pendant que tu dessines :**
+
+| Signal | Ce qu'il veut dire |
+|---|---|
+| Case bordée de **rouge** | Deux voisines qui ne s'entendent pas se touchent |
+| Case bordée d'**orange** | Emplacement conseillé pour la plante sélectionnée (bouton ✨ « Où planter ? ») |
+| Panneau 🤝 | Les bonnes associations déjà en place |
+| Panneau 🔄 | Une famille revient à l'emplacement qu'elle occupait sur le plan de l'an dernier |
+| Panneau 💡 | Les plantes qui manquent, d'après ce que tu as déjà posé |
+
+Le score d'un emplacement compte +2 par voisine amie, −3 par voisine ennemie, +1 pour regrouper
+la même plante. Le voisinage pris en compte est celui des **8 cases autour**.
+
+**Les surfaces sont calculées** : « 2,25 m² de tomates ≈ 9 plants », d'après l'espacement de
+chaque fiche. L'outil **👆 Info** détaille une case : ce qu'il y a dessus, ses voisines, et ce
+qu'elles en pensent.
+
+**D'une année sur l'autre** : le bouton « 📅 Copier pour *année+1* » reprend la forme et les
+dimensions mais **vide les plantations** — c'est voulu, pour repenser la rotation. L'appli
+compare ensuite avec l'année précédente, case par case.
 
 ## L'autosuffisance
 
@@ -268,6 +307,7 @@ plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'
 | `planning.js` | Tout l'écran Planning : grille, récoltes, alertes, gelées |
 | `meteo.js` | Les prévisions Open-Meteo et leur traduction en conseils |
 | `autonomie.js` | L'écran Autosuffisance : jauges, conversions, surfaces |
+| `plan.js` | Le plan du potager : grille, découpe, plantation, conseils de voisinage |
 | `sauvegarde.js` | Protection des données : rappel d'export, copie de secours, stockage durable |
 | `sync.js` | Synchronisation Firebase entre appareils |
 | `firebase-config.js` | La configuration Firebase, à remplir une fois (voir `GUIDE-FIREBASE.md`) |

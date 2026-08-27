@@ -15,12 +15,14 @@ function donneesPresentes() {
   return etat.zones.length > 0
     || etat.cultures.length > 0
     || etat.planning.length > 0
+    || (etat.plans || []).length > 0
     || etat.favoris.length > 0
     || etat.taches.some(t => !t.auto);
 }
 
 function nombreDonnees() {
   return etat.zones.length + etat.cultures.length + etat.planning.length
+    + (etat.plans || []).length
     + etat.taches.filter(t => !t.auto).length + etat.favoris.length;
 }
 

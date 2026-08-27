@@ -18,7 +18,7 @@ const DUREE_APPAIRAGE_MS = 23 * 3600 * 1000;
 /* Rubriques réellement synchronisées : ce qui décrit le potager.
    Les réglages propres à l'appareil (notifications, lieu météo,
    prévisions téléchargées) restent locaux. */
-const RUBRIQUES_SYNC = ["zones", "cultures", "taches", "favoris", "planning"];
+const RUBRIQUES_SYNC = ["zones", "cultures", "taches", "favoris", "planning", "plans"];
 
 let firebase = null;        // modules chargés à la demande
 let docPotager = null;
