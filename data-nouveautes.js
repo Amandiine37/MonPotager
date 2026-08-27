@@ -1,21 +1,18 @@
 /* Journal des nouveautés affiché dans la cloche 🔔
    La plus récente en premier. Pour annoncer une nouveauté, ajoute un bloc en haut :
-   la pastille rouge réapparaîtra automatiquement sur la cloche. */
+   la pastille rouge réapparaîtra automatiquement sur la cloche.
+
+   ⚠️ ON N'ANNONCE ICI QUE LES NOUVEAUTÉS, jamais les corrections de bugs :
+   la cloche sert à faire découvrir ce que l'appli sait faire de plus, pas à
+   raconter ce qui était cassé. Les corrections partent en silence.
+
+   VERSION_APPLI suit toutes les livraisons (corrections comprises) et doit
+   correspondre au VERSION de sw.js et aux ?v=… d'index.html.
+   VERSION_ACTUELLE, elle, ne bouge qu'avec les vraies nouveautés. */
+
+const VERSION_APPLI = "2.7";
 
 const NOUVEAUTES = [
-
-{ version: "2.6", date: "2026-08-27", titre: "L'appli se rouvre là où tu l'as laissée",
-  points: [
-    { emoji: "🐞", texte: "<strong>Correction</strong> : rouvrir l'appli — surtout depuis l'icône installée — ramenait toujours sur l'accueil. Elle retrouve maintenant l'écran où tu étais." },
-    { emoji: "📑", texte: "<strong>Et le sous-onglet aussi</strong> : si tu étais dans Perma → Le sol → Les gestes, tu y reviens directement. Idem pour le plan que tu avais ouvert." }
-  ] },
-
-{ version: "2.5", date: "2026-08-27", titre: "L'écran ne remonte plus tout seul",
-  points: [
-    { emoji: "🐞", texte: "<strong>Correction</strong> : chaque clic sur le plan du potager renvoyait la page tout en haut, obligeant à redescendre à chaque case peinte. L'écran reste maintenant exactement où tu l'as laissé." },
-    { emoji: "↔️", texte: "Le <strong>défilement latéral</strong> d'un grand plan est lui aussi conservé : tu ne repars plus de la gauche à chaque case." },
-    { emoji: "✅", texte: "Même correction partout : cocher une tâche, noter une récolte ou changer un réglage ne fait plus sauter la page. Seul un vrai changement d'écran remonte en haut." }
-  ] },
 
 { version: "2.4", date: "2026-08-27", titre: "41 plantes de plus, dont les engrais verts",
   points: [
@@ -23,7 +20,7 @@ const NOUVEAUTES = [
     { emoji: "🥬", texte: "<strong>20 légumes de plus</strong>, dont les perpétuels qui font le cœur d'un potager permanent : chou Daubenton, poireau perpétuel, oignon rocambole, chénopode Bon-Henri, tétragone, crosne, cardon, salsifis, scorsonère, chervis, poire de terre." },
     { emoji: "🌿", texte: "<strong>8 aromatiques</strong> : ciboule de Chine, fenouil bronze, sauge ananas, shiso, stévia, népéta, absinthe, rue — avec les avertissements qui s'imposent pour les deux dernières." },
     { emoji: "🌼", texte: "<strong>7 médicinales</strong> : mélilot, onagre, aigremoine, alchémille, armoise, salicaire, agastache." },
-    { emoji: "🌳", texte: "<strong>L'ombre portée est plus juste</strong> : elle vaut désormais 0,6 fois la hauteur de la plante. Un cerisier de 5 m n'ombre plus comme un figuier." }
+    { emoji: "🌳", texte: "<strong>L'ombre portée tient compte de la taille</strong> : elle vaut 0,6 fois la hauteur de la plante, donc un cerisier de 5 m ombrage bien plus loin qu'un figuier." }
   ] },
 
 { version: "2.3", date: "2026-08-27", titre: "L'ombre des grandes, et la terre",
@@ -34,9 +31,8 @@ const NOUVEAUTES = [
     { emoji: "🧪", texte: "<strong>L'appli passe en bêta assumée</strong> : depuis l'écran Rappels, tu peux proposer une idée ou signaler un problème en deux clics." }
   ] },
 
-{ version: "2.2", date: "2026-08-27", titre: "Soleil, eau, et une couleur qui ne bouge plus",
+{ version: "2.2", date: "2026-08-27", titre: "Le soleil et l'eau entrent dans le plan",
   points: [
-    { emoji: "🐞", texte: "<strong>Correction</strong> : la couleur d'une plante sur le plan changeait quand on en ajoutait une autre. Chaque plante garde désormais sa couleur pour de bon." },
     { emoji: "☀️", texte: "<strong>Nouvel outil Soleil</strong> : marque les coins ombragés de ton potager — mur, haie, arbre. L'appli te prévient si une plante y est mal placée : « la laitue préfère la mi-ombre : au plein soleil elle montera en graine »." },
     { emoji: "💧", texte: "<strong>Besoin en eau</strong> : la surface occupée par chaque niveau d'arrosage, et une alerte quand deux voisines ont des besoins opposés — l'une sera noyée, l'autre assoiffée." },
     { emoji: "✨", texte: "<strong>« Où planter ? » tient compte du soleil</strong> : une case mal exposée n'est jamais proposée, même entourée de bonnes compagnes." }
@@ -88,7 +84,7 @@ const NOUVEAUTES = [
   points: [
     { emoji: "🌦️", texte: "<strong>Une icône météo en haut de l'écran</strong>, à côté de cette cloche. Éteinte tant que tu n'as pas activé les prévisions ; une fois allumée, elle affiche le temps et la température du jour." },
     { emoji: "🔴", texte: "<strong>Un point rouge apparaît</strong> quand quelque chose mérite ton attention : gelée annoncée, canicule, vent fort. Un appui ouvre les 7 jours et les conseils du jardinier." },
-    { emoji: "♻️", texte: "<strong>Fini les versions fantômes</strong> : quand une mise à jour de l'appli est prête, un bandeau te propose de recharger. Avant, l'ancienne version continuait de tourner et les nouveautés semblaient ne pas marcher." }
+    { emoji: "♻️", texte: "<strong>Un bandeau te propose de recharger</strong> dès qu'une mise à jour de l'appli est prête." }
   ] },
 
 { version: "1.3", date: "2026-08-27", titre: "Où en est mon autosuffisance ?",

@@ -360,6 +360,19 @@ GitHub Pages, tu repartiras d'un potager vide. Utilise **Exporter / Importer**
 Ouvre `data-nouveautes.js` et ajoute un bloc **en haut** de la liste, avec un numéro de version
 plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'on l'ouvre.
 
+⚠️ **La cloche n'annonce que des nouveautés, jamais des corrections de bugs.** Elle sert à faire
+découvrir ce que l'appli sait faire de plus ; raconter ce qui était cassé n'intéresse personne et
+donne une impression de fragilité. Les corrections partent en silence.
+
+D'où deux numéros de version distincts, dans le même fichier :
+
+| Constante | Ce qu'elle suit | Où elle sert |
+|---|---|---|
+| `VERSION_APPLI` | **toutes** les livraisons, corrections comprises | carte bêta, envoi des retours |
+| `VERSION_ACTUELLE` | uniquement les vraies nouveautés (dernier bloc du journal) | pastille de la cloche |
+
+`VERSION_APPLI` doit rester identique au `VERSION` de `sw.js` et aux `?v=…` d'`index.html`.
+
 ## Fichiers
 
 | Fichier | Rôle |

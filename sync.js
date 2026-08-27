@@ -483,7 +483,7 @@ async function envoyerRetour(ev, type) {
     type: type,
     titre: f.get("titre").trim().slice(0, 150),
     detail: (f.get("detail") || "").trim().slice(0, 2000),
-    version: typeof VERSION_ACTUELLE !== "undefined" ? VERSION_ACTUELLE : "?",
+    version: typeof VERSION_APPLI !== "undefined" ? VERSION_APPLI : "?",
     appareil: navigator.userAgent.slice(0, 200),
     envoyeLe: Date.now()
   };
@@ -523,7 +523,7 @@ function carteBeta() {
         <button class="bouton" onclick="formulaireRetour('idee')">💡 Proposer une idée</button>
         <button class="bouton bouton-doux" onclick="formulaireRetour('bug')">🐛 Signaler un problème</button>
       </div>
-      <p class="note">Version actuellement installée : <strong>${typeof VERSION_ACTUELLE !== "undefined" ? esc(VERSION_ACTUELLE) : "?"}</strong>.
+      <p class="note">Version actuellement installée : <strong>${typeof VERSION_APPLI !== "undefined" ? esc(VERSION_APPLI) : "?"}</strong>.
         La cloche 🔔 en haut liste tout ce qui a été ajouté.</p>
     </div>`;
 }
