@@ -78,6 +78,10 @@ function vueAccueil() {
       <h1>${MOIS[mois - 1]} au potager</h1>
     </header>
 
+    ${messageBienvenue()}
+
+    ${bandeauSauvegardeAccueil()}
+
     ${resumeMeteoAccueil()}
 
     ${resumeAutonomieAccueil()}
@@ -729,15 +733,9 @@ function blocNotifications() {
       ${actif
         ? `<button class="bouton bouton-doux" onclick="desactiverNotifications()">Désactiver</button>`
         : `<button class="bouton" onclick="demanderNotifications()">Activer les notifications</button>`}
-      <h3 class="marge-haut">💾 Sauvegarde</h3>
-      <p class="note">Tes données sont stockées uniquement dans ce navigateur. Exporte-les de temps en temps pour ne rien perdre.</p>
-      <div class="barre-boutons">
-        <button class="bouton bouton-doux" onclick="exporterDonnees()">Exporter</button>
-        <label class="bouton bouton-doux fichier">Importer
-          <input type="file" accept="application/json" onchange="if(this.files[0])importerDonnees(this.files[0])">
-        </label>
-      </div>
-    </div>`;
+    </div>
+
+    ${carteSauvegarde()}`;
 }
 
 async function demanderNotifications() {

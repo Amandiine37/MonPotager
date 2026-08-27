@@ -156,8 +156,38 @@ créer, et rien de ton potager n'est jamais envoyé sur internet — la seule co
 possible est l'option météo décrite plus haut, qui ne transmet que des coordonnées.
 
 Conséquence : les données ne sont **pas** partagées entre le PC et le téléphone,
-et vider les données du navigateur les efface. L'écran **Rappels** propose un
-bouton **Exporter** (fichier `.json` à conserver) et **Importer** pour restaurer.
+et **personne ne peut les récupérer à ta place** si elles sont effacées.
+
+### Ce qui peut les effacer
+
+- Vider les données de navigation ou l'historique du navigateur.
+- Utiliser l'appli en navigation privée : tout disparaît en fermant.
+- **Sur iPhone** : Safari efface les données des sites non installés au bout de 7 jours sans
+  visite. C'est le risque le plus courant, et il surprend tout le monde.
+- Un navigateur à court d'espace qui fait le ménage tout seul.
+
+### Les trois protections en place
+
+1. **Installer l'appli** (menu du navigateur → « Installer » ou « Ajouter à l'écran d'accueil »)
+   est de loin la plus efficace : elle lève notamment la limite des 7 jours sur iPhone.
+2. **Le stockage durable** : l'appli demande au navigateur, via `navigator.storage.persist()`,
+   de ne jamais supprimer ses données pour faire de la place. Accordé ou non selon le
+   navigateur ; l'état réel est affiché dans l'écran Rappels.
+3. **Le rappel de sauvegarde** : passé 14 jours sans export, un bandeau apparaît sur l'accueil.
+   Le bouton « Plus tard » le repousse d'une semaine. Exporter remet le compteur à zéro.
+
+### Copie de secours interne
+
+Une copie complète est conservée dans le navigateur, refaite tous les 3 jours, restaurable
+depuis l'écran Rappels. Elle rattrape une **fausse manœuvre dans l'appli** (zone supprimée par
+erreur) mais **pas** un effacement du navigateur : elle est rangée au même endroit que les
+données. Elle ne remplace donc jamais un export.
+
+### L'export, seule vraie sauvegarde
+
+Écran **Rappels** → **Exporter ma sauvegarde** : un fichier `.json` que tu ranges où tu veux
+(disque, cloud, mail à toi-même). **Restaurer un fichier** le recharge sur n'importe quel
+appareil — c'est aussi comme ça qu'on transfère son potager du PC au téléphone.
 
 ## Mettre l'application en ligne (GitHub Pages)
 
@@ -207,6 +237,7 @@ plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'
 | `planning.js` | Tout l'écran Planning : grille, récoltes, alertes, gelées |
 | `meteo.js` | Les prévisions Open-Meteo et leur traduction en conseils |
 | `autonomie.js` | L'écran Autosuffisance : jauges, conversions, surfaces |
+| `sauvegarde.js` | Protection des données : rappel d'export, copie de secours, stockage durable |
 | `vues.js` | Affichage des écrans et des formulaires |
 | `data-legumes.js` · `data-aromatiques.js` · `data-medicinales.js` | Base de connaissances des plantes |
 | `data-permaculture.js` | Travaux du mois, rotation, préparations, principes |

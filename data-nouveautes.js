@@ -4,6 +4,14 @@
 
 const NOUVEAUTES = [
 
+{ version: "1.5", date: "2026-08-27", titre: "Ne plus perdre son potager",
+  points: [
+    { emoji: "💾", texte: "<strong>Rappel de sauvegarde</strong> : si plus de 14 jours passent sans export, l'appli te le signale sur l'accueil. Tes données ne vivent que dans ce navigateur — personne ne peut les récupérer à ta place." },
+    { emoji: "🔒", texte: "<strong>Stockage durable</strong> : l'appli demande au navigateur de ne jamais effacer tes données pour faire de la place." },
+    { emoji: "↩️", texte: "<strong>Copie de secours interne</strong>, refaite tous les 3 jours : elle te rattrape si tu supprimes une zone ou une culture par erreur." },
+    { emoji: "📖", texte: "<strong>Tout est expliqué</strong> dans l'onglet Rappels : où sont tes données, ce qui peut les effacer, et comment t'en protéger. À lire une fois, surtout sur iPhone." }
+  ] },
+
 { version: "1.4", date: "2026-08-27", titre: "La météo à portée de pouce",
   points: [
     { emoji: "🌦️", texte: "<strong>Une icône météo en haut de l'écran</strong>, à côté de cette cloche. Éteinte tant que tu n'as pas activé les prévisions ; une fois allumée, elle affiche le temps et la température du jour." },

@@ -43,7 +43,11 @@ const etatVide = () => ({
     lieu: null,
     previsions: null
   },
-  reglages: { notifs: false, dernierRappel: "", anneePlanning: 0, derniereNouveauteVue: "" }
+  reglages: {
+    notifs: false, dernierRappel: "", anneePlanning: 0, derniereNouveauteVue: "",
+    derniereSauvegarde: "", rappelSauvegardeMasque: "", bienvenueVue: false,
+    stockagePersistant: false
+  }
 });
 
 let etat = charger();
@@ -368,6 +372,12 @@ function exporterDonnees() {
   lien.click();
   document.body.removeChild(lien);
   URL.revokeObjectURL(lien.href);
+
+  // On note la date pour ne plus réclamer de sauvegarde inutilement
+  etat.reglages.derniereSauvegarde = iso(aujourdhui());
+  etat.reglages.rappelSauvegardeMasque = "";
+  sauver();
+  if (typeof afficher === "function") afficher();
 }
 
 function importerDonnees(fichier) {
@@ -472,6 +482,8 @@ window.addEventListener("DOMContentLoaded", () => {
   verifierRappels();
   actualiserMeteoSiNecessaire();
   surveillerMisesAJour();
+  faireCopieDeSecours();
+  if (etat.reglages.bienvenueVue) demanderStockagePersistant();
 });
 
 /* ---------------- Mises à jour de l'application ----------------

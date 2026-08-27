@@ -71,6 +71,9 @@ a { color: var(--vert); }
 }
 .barre-actions { display: flex; align-items: center; gap: 2px; }
 
+.etat-ok    { color: var(--vert); font-weight: 600; }
+.etat-moyen { color: var(--terre); font-weight: 600; }
+
 /* Bandeau « nouvelle version disponible » */
 .bandeau-maj {
   position: fixed;
