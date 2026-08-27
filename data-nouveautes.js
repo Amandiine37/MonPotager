@@ -7,7 +7,8 @@ const NOUVEAUTES = [
 { version: "1.4", date: "2026-08-27", titre: "La météo à portée de pouce",
   points: [
     { emoji: "🌦️", texte: "<strong>Une icône météo en haut de l'écran</strong>, à côté de cette cloche. Éteinte tant que tu n'as pas activé les prévisions ; une fois allumée, elle affiche le temps et la température du jour." },
-    { emoji: "🔴", texte: "<strong>Un point rouge apparaît</strong> quand quelque chose mérite ton attention : gelée annoncée, canicule, vent fort. Un appui ouvre les 7 jours et les conseils du jardinier." }
+    { emoji: "🔴", texte: "<strong>Un point rouge apparaît</strong> quand quelque chose mérite ton attention : gelée annoncée, canicule, vent fort. Un appui ouvre les 7 jours et les conseils du jardinier." },
+    { emoji: "♻️", texte: "<strong>Fini les versions fantômes</strong> : quand une mise à jour de l'appli est prête, un bandeau te propose de recharger. Avant, l'ancienne version continuait de tourner et les nouveautés semblaient ne pas marcher." }
   ] },
 
 { version: "1.3", date: "2026-08-27", titre: "Où en est mon autosuffisance ?",

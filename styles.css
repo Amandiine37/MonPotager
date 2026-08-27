@@ -71,6 +71,33 @@ a { color: var(--vert); }
 }
 .barre-actions { display: flex; align-items: center; gap: 2px; }
 
+/* Bandeau « nouvelle version disponible » */
+.bandeau-maj {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(62px + env(safe-area-inset-bottom));
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--vert-fonce);
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: .88rem;
+  box-shadow: 0 6px 20px rgba(40, 50, 35, .25);
+}
+.bandeau-maj .bouton {
+  background: #fff;
+  color: var(--vert-fonce);
+  padding: 7px 14px;
+  font-size: .85rem;
+  flex: 0 0 auto;
+}
+.bandeau-maj .bouton:hover { background: var(--vert-pale); }
+
 .meteo-barre {
   position: relative;
   display: flex;

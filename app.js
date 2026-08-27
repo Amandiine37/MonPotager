@@ -388,10 +388,6 @@ function importerDonnees(fichier) {
   lecteur.readAsText(fichier);
 }
 
-/* ---------------- Navigation ---------------- */
-
-const PAGES = ["accueil", "calendrier", "planning", "autonomie", "plantes", "potager", "taches", "permaculture"];
-
 /* ---------------- Cloche des nouveautés ---------------- */
 
 function nouveautesNonLues() {
@@ -414,6 +410,10 @@ function majCloche() {
   pastille.textContent = n > 9 ? "9+" : String(n);
   pastille.hidden = n === 0;
 }
+
+/* ---------------- Navigation ---------------- */
+
+const PAGES = ["accueil", "calendrier", "planning", "autonomie", "plantes", "potager", "taches", "permaculture"];
 
 function pageCourante() {
   const h = (location.hash || "#accueil").slice(1).split("/")[0];
@@ -448,8 +448,39 @@ window.addEventListener("DOMContentLoaded", () => {
   afficher();
   verifierRappels();
   actualiserMeteoSiNecessaire();
-
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
-  }
+  surveillerMisesAJour();
 });
+
+/* ---------------- Mises à jour de l'application ----------------
+   L'appli garde une copie d'elle-même pour fonctionner hors connexion.
+   Quand une nouvelle version est déposée, la copie déjà ouverte continue de
+   tourner jusqu'au prochain rechargement : on prévient donc explicitement,
+   au lieu de laisser croire qu'un bouton « ne marche pas ». */
+
+function surveillerMisesAJour() {
+  if (!("serviceWorker" in navigator)) return;
+
+  navigator.serviceWorker.register("sw.js").then(enregistrement => {
+    enregistrement.addEventListener("updatefound", () => {
+      const nouveau = enregistrement.installing;
+      if (!nouveau) return;
+      nouveau.addEventListener("statechange", () => {
+        if (nouveau.state === "installed" && navigator.serviceWorker.controller) {
+          bandeauMiseAJour();
+        }
+      });
+    });
+    enregistrement.update().catch(() => {});   // vérifie à chaque ouverture
+  }).catch(() => {});
+}
+
+function bandeauMiseAJour() {
+  if (document.getElementById("bandeau-maj")) return;
+  const bandeau = document.createElement("div");
+  bandeau.id = "bandeau-maj";
+  bandeau.className = "bandeau-maj";
+  bandeau.innerHTML =
+    "<span>🌱 Une nouvelle version de l'appli est prête.</span>"
+    + '<button class="bouton" onclick="location.reload()">Recharger</button>';
+  document.body.appendChild(bandeau);
+}
