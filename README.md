@@ -21,12 +21,13 @@ Sur téléphone ou sur PC, le menu du navigateur propose « Installer l'applicat
 ou « Ajouter à l'écran d'accueil » : elle s'ouvre alors comme une vraie appli et
 fonctionne sans connexion internet.
 
-## Les 7 écrans
+## Les 8 écrans
 
 | Écran | À quoi il sert |
 |---|---|
 | **Accueil** | Ce qu'il y a à semer, planter et récolter ce mois-ci, les rappels en retard et les travaux de permaculture du mois. |
 | **Planning** | **Ton** calendrier de plantation de l'année : tu choisis tes plantes, tu ajustes les mois, tu suis tes récoltes. |
+| **Autonomie** | Tes récoltes comparées aux besoins de ton foyer, avec des jauges qui se remplissent. |
 | **Calendrier** | Le calendrier de référence : les 12 mois de toutes les plantes de la bibliothèque, sans rien de personnel. |
 | **Plantes** | 91 fiches détaillées : culture, associations, rotation, conseils permaculture, propriétés médicinales. |
 | **Potager** | Tes zones (planches, carrés, serre) et ce que tu y as semé ou planté, avec alertes d'association et de rotation. |
@@ -59,8 +60,8 @@ fonctionne sans connexion internet.
   qui montre les mois où tu t'es surchargée.
 - **Mois par mois** : la liste de ce qu'il y a à faire chaque mois, à cocher au fur et à mesure,
   avec les travaux de permaculture du mois juste en dessous.
-- **Météo & gelées** : tes deux dates de gelées, ton décalage de saison et ton journal
-  d'observations de l'année.
+- **Météo & gelées** : les prévisions à 7 jours (en option), tes deux dates de gelées,
+  ton décalage de saison et ton journal d'observations de l'année.
 
 **Les alertes automatiques**
 
@@ -79,6 +80,65 @@ fonctionne sans connexion internet.
 - **Reprendre le planning de l'année précédente** : proposé quand tu passes à l'année suivante
   (les flèches ◀ ▶ à côté de l'année).
 
+## L'autosuffisance
+
+Onglet **Autonomie** (menu du bas). Il partage l'année sélectionnée avec le Planning, dont il
+lit les récoltes. Tu indiques combien de personnes vivent au foyer
+(les enfants de moins de 12 ans comptent pour une demi-part) et tes récoltes se transforment
+en jauges.
+
+**Deux repères, volontairement distincts :**
+
+- **Sur ce que tu cultives** — as-tu récolté assez des légumes que tu as effectivement plantés ?
+  C'est le chiffre qui dit si tes surfaces sont bien dimensionnées.
+- **Sur une alimentation complète en légumes** — ta vraie part d'autonomie. Il est forcément
+  plus bas, et c'est normal : personne ne cultive les 44 légumes de la liste.
+
+**Légume par légume**, chaque ligne indique le récolté, le besoin annuel du foyer, le
+pourcentage, et surtout **combien de mètres carrés supplémentaires** il faudrait pour combler
+le manque (« il manque 60 kg de pommes de terre — soit environ 20 m² de plus »). Un badge
+« quota atteint » apparaît à 100 %.
+
+En bas, l'appli propose les légumes qui **pèsent le plus** dans l'alimentation d'un foyer et
+qui ne sont pas encore à ton planning, avec le besoin annuel calculé pour ton foyer.
+
+**Les unités sont converties automatiquement** : les grammes en kilos, les pièces et les bottes
+en kilos grâce à un poids moyen par légume (une salade ≈ 300 g, un poireau ≈ 250 g, une tête
+d'ail ≈ 60 g). Les récoltes notées en litres ou en bouquets ne sont pas convertibles : elles
+sont exclues du calcul, et l'appli te le signale.
+
+Le résumé apparaît aussi sur l'écran d'accueil dès que tu as noté une récolte.
+
+**D'où viennent les chiffres.** Les besoins annuels s'appuient sur la consommation moyenne d'un
+adulte en France, les rendements sur des moyennes de jardin amateur. Tout est dans
+`data-besoins.js`, une ligne par légume, facile à corriger si tes chiffres réels diffèrent —
+et ils différeront. Les aromatiques et les médicinales ne sont pas comptées.
+
+## Les prévisions météo (option, désactivée par défaut)
+
+**Le plus simple : l'icône 🌦️ en haut de l'écran**, juste à gauche de la cloche. Elle est
+éteinte (grisée) tant que les prévisions ne sont pas activées ; un appui propose de choisir
+ton lieu. Une fois allumée, elle affiche le temps et la température du jour, et un **point
+rouge** apparaît dès qu'il y a une alerte (gelée, canicule, vent fort) ; un appui ouvre les
+7 jours et les conseils.
+
+Les réglages complets sont dans **Planning → Météo & gelées**, bouton
+« 📍 Choisir mon lieu et activer ».
+Tu tapes le nom de ta commune, tu la choisis dans la liste, et l'appli affiche 7 jours de
+prévisions : températures max/min, pluie, vent et surtout **température du sol à 6 cm** —
+la seule donnée qui dit vraiment si une graine va germer.
+
+Le tout est traduit en conseils de jardinage : faut-il arroser, une gelée arrive-t-elle
+(avec les plantes de ton planning qui sont concernées), le sol est-il assez chaud pour semer
+des haricots. Les alertes importantes remontent aussi sur l'écran d'accueil.
+
+**Ce que ça implique.** C'est la seule partie de l'application qui utilise internet. Elle
+interroge **Open-Meteo** (open-meteo.com), gratuit et sans compte, en lui envoyant uniquement
+les coordonnées de la commune choisie. Rien de ton potager n'est transmis. Les prévisions se
+rafraîchissent au maximum une fois toutes les 3 heures, et sont conservées pour rester
+consultables hors connexion. Le bouton « Désactiver » supprime le lieu et les prévisions, et
+l'appli redevient totalement hors ligne.
+
 ## Ce que fait l'appli toute seule
 
 - **Rappel de repiquage** : 5 semaines après un semis sous abri.
@@ -91,8 +151,9 @@ fonctionne sans connexion internet.
 
 ## Où sont mes données ?
 
-Uniquement dans le navigateur de cet appareil (`localStorage`). Rien n'est envoyé
-sur internet, il n'y a pas de compte à créer.
+Uniquement dans le navigateur de cet appareil (`localStorage`). Il n'y a pas de compte à
+créer, et rien de ton potager n'est jamais envoyé sur internet — la seule connexion sortante
+possible est l'option météo décrite plus haut, qui ne transmet que des coordonnées.
 
 Conséquence : les données ne sont **pas** partagées entre le PC et le téléphone,
 et vider les données du navigateur les efface. L'écran **Rappels** propose un
@@ -129,6 +190,7 @@ GitHub Pages, tu repartiras d'un potager vide. Utilise **Exporter / Importer**
 - **25 plantes médicinales**
 - **72 mois de travaux** répartis sur l'année
 - **6 recettes** de purins et décoctions maison
+- **44 légumes** avec besoins annuels et rendements, pour le calcul d'autosuffisance
 
 ## Annoncer une nouveauté dans la cloche
 
@@ -142,10 +204,13 @@ plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'
 | `index.html` | Page unique de l'application |
 | `styles.css` | Habillage |
 | `app.js` | Données, dates, rappels, alphabet, cloche, navigation |
-| `planning.js` | Tout l'écran Planning : grille, récoltes, alertes, météo |
+| `planning.js` | Tout l'écran Planning : grille, récoltes, alertes, gelées |
+| `meteo.js` | Les prévisions Open-Meteo et leur traduction en conseils |
+| `autonomie.js` | L'écran Autosuffisance : jauges, conversions, surfaces |
 | `vues.js` | Affichage des écrans et des formulaires |
 | `data-legumes.js` · `data-aromatiques.js` · `data-medicinales.js` | Base de connaissances des plantes |
 | `data-permaculture.js` | Travaux du mois, rotation, préparations, principes |
+| `data-besoins.js` | Besoins annuels par adulte, rendements au m², poids moyens |
 | `data-nouveautes.js` | Le contenu de la cloche 🔔 |
 | `sw.js` · `manifest.webmanifest` | Fonctionnement hors connexion et installation |
 | `make_icons.py` | Regénère les icônes (`python make_icons.py`) |

@@ -15,9 +15,12 @@
 
 <header class="barre-appli">
   <a class="barre-titre" href="#accueil">🌱 Mon Potager</a>
-  <button class="cloche" onclick="ouvrirNouveautes()" aria-label="Nouveautés de l'application" title="Quoi de neuf ?">
-    🔔<span id="pastille-cloche" class="pastille-cloche" hidden>0</span>
-  </button>
+  <div class="barre-actions">
+    <button class="meteo-barre" id="meteo-barre" onclick="ouvrirMeteoRapide()" aria-label="Météo du potager" title="Météo">🌦️</button>
+    <button class="cloche" onclick="ouvrirNouveautes()" aria-label="Nouveautés de l'application" title="Quoi de neuf ?">
+      🔔<span id="pastille-cloche" class="pastille-cloche" hidden>0</span>
+    </button>
+  </div>
 </header>
 
 <div id="contenu" class="contenu"></div>
@@ -26,6 +29,7 @@
   <a class="nav-item" data-page="accueil" href="#accueil"><span class="nav-emoji">🏡</span>Accueil</a>
   <a class="nav-item" data-page="planning" href="#planning"><span class="nav-emoji">📋</span>Planning</a>
   <a class="nav-item" data-page="calendrier" href="#calendrier"><span class="nav-emoji">📅</span>Calendrier</a>
+  <a class="nav-item" data-page="autonomie" href="#autonomie"><span class="nav-emoji">⚖️</span>Autonomie</a>
   <a class="nav-item" data-page="plantes" href="#plantes"><span class="nav-emoji">🌱</span>Plantes</a>
   <a class="nav-item" data-page="potager" href="#potager"><span class="nav-emoji">🧑‍🌾</span>Potager</a>
   <a class="nav-item" data-page="taches" href="#taches"><span class="nav-emoji">🔔</span>Rappels</a>
@@ -38,9 +42,12 @@
 <script src="data-aromatiques.js"></script>
 <script src="data-medicinales.js"></script>
 <script src="data-permaculture.js"></script>
+<script src="data-besoins.js"></script>
 <script src="data-nouveautes.js"></script>
 <script src="app.js"></script>
 <script src="planning.js"></script>
+<script src="meteo.js"></script>
+<script src="autonomie.js"></script>
 <script src="vues.js"></script>
 </body>
 </html>

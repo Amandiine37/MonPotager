@@ -38,7 +38,10 @@ const etatVide = () => ({
     journal: [],
     gelPrintemps: "05-15",   // Saints de Glace
     gelAutomne: "11-05",
-    decalage: 0
+    decalage: 0,
+    enLigne: false,          // prévisions Open-Meteo : désactivées par défaut
+    lieu: null,
+    previsions: null
   },
   reglages: { notifs: false, dernierRappel: "", anneePlanning: 0, derniereNouveauteVue: "" }
 });
@@ -387,7 +390,7 @@ function importerDonnees(fichier) {
 
 /* ---------------- Navigation ---------------- */
 
-const PAGES = ["accueil", "calendrier", "planning", "plantes", "potager", "taches", "permaculture"];
+const PAGES = ["accueil", "calendrier", "planning", "autonomie", "plantes", "potager", "taches", "permaculture"];
 
 /* ---------------- Cloche des nouveautés ---------------- */
 
@@ -434,6 +437,7 @@ function afficher() {
   conteneur.scrollTop = 0;
   window.scrollTo(0, 0);
   majCloche();
+  majBarreMeteo();
 }
 
 window.addEventListener("hashchange", afficher);
@@ -443,6 +447,7 @@ window.addEventListener("DOMContentLoaded", () => {
   sauver();
   afficher();
   verifierRappels();
+  actualiserMeteoSiNecessaire();
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(() => {});

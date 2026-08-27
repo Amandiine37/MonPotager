@@ -366,6 +366,102 @@ async function actualiserMeteoSiNecessaire() {
   }
 }
 
+/* ---------------- Icône météo de la barre du haut ---------------- */
+
+function jourAujourdhui() {
+  const p = etat.meteo.previsions;
+  if (!p || !p.jours || !p.jours.length) return null;
+  const jour = iso(aujourdhui());
+  return p.jours.find(j => j.date === jour) || p.jours[0];
+}
+
+function majBarreMeteo() {
+  const bouton = document.getElementById("meteo-barre");
+  if (!bouton) return;
+
+  if (!etat.meteo.enLigne || !etat.meteo.lieu) {
+    bouton.className = "meteo-barre meteo-eteinte";
+    bouton.innerHTML = "🌦️";
+    bouton.title = "Activer les prévisions météo";
+    return;
+  }
+
+  const j = jourAujourdhui();
+  if (!j) {
+    bouton.className = "meteo-barre";
+    bouton.innerHTML = "🌦️";
+    bouton.title = "Prévisions à télécharger";
+    return;
+  }
+
+  const [texte, emoji] = libelleMeteo(j.code);
+  const alerte = conseilsMeteo().some(c => c.niveau === "alerte");
+  bouton.className = "meteo-barre" + (alerte ? " meteo-barre-alerte" : "");
+  bouton.innerHTML = `${emoji}<span class="meteo-barre-temp">${j.tMax != null ? arrondiUn(j.tMax) + "°" : ""}</span>`
+    + (alerte ? '<span class="point-alerte"></span>' : "");
+  bouton.title = `${texte} · ${etat.meteo.lieu.nom}`;
+}
+
+function ouvrirMeteoRapide() {
+  if (!etat.meteo.enLigne || !etat.meteo.lieu) {
+    ouvrirModale("Prévisions météo", `
+      <p>Active les prévisions à 7 jours pour savoir s'il faut arroser, si une gelée arrive,
+      et si ton sol est assez chaud pour semer.</p>
+      <div class="encart-confidentialite">
+        <strong>Ce que ça implique</strong>
+        <p>C'est la seule option de l'application qui utilise internet. Elle interroge
+        <strong>Open-Meteo</strong> (open-meteo.com), gratuit et sans compte, en lui envoyant
+        uniquement les coordonnées du lieu que tu choisis. Aucune donnée de ton potager n'est
+        transmise, et tu peux la désactiver à tout moment.</p>
+      </div>
+      <div class="modale-actions">
+        <button class="bouton bouton-doux" onclick="fermerModale()">Plus tard</button>
+        <button class="bouton" onclick="fermerModale();formulaireLieu()">📍 Choisir mon lieu</button>
+      </div>`);
+    return;
+  }
+
+  const p = etat.meteo.previsions;
+  const conseils = conseilsMeteo();
+
+  const bandeau = p && p.jours ? `
+    <div class="meteo-jours">
+      ${p.jours.map(j => {
+        const [texte, emoji] = libelleMeteo(j.code);
+        const gele = j.tMin != null && j.tMin <= 2;
+        return `
+          <div class="meteo-jour ${gele ? "meteo-gel" : ""}" title="${esc(texte)}">
+            <span class="meteo-nom">${nomJour(j.date)}</span>
+            <span class="meteo-emoji">${emoji}</span>
+            <span class="meteo-max">${j.tMax != null ? arrondiUn(j.tMax) + "°" : "—"}</span>
+            <span class="meteo-min ${gele ? "min-gel" : ""}">${j.tMin != null ? arrondiUn(j.tMin) + "°" : "—"}</span>
+            <span class="meteo-pluie">${j.pluie ? arrondiUn(j.pluie) + " mm" : "—"}</span>
+            <span class="meteo-sol">${j.sol != null ? "sol " + arrondiUn(j.sol) + "°" : ""}</span>
+          </div>`;
+      }).join("")}
+    </div>` : `<p class="rien">Aucune prévision téléchargée.</p>`;
+
+  ouvrirModale(etat.meteo.lieu.nom, `
+    <p class="note">${p && p.maj ? "Mis à jour " + majLisible(p.maj) : ""}</p>
+    ${bandeau}
+    <ul class="liste-conseils marge-haut">
+      ${conseils.map(c => `
+        <li class="conseil conseil-${c.niveau}">
+          <span class="conseil-emoji">${c.emoji}</span><span>${esc(c.texte)}</span>
+        </li>`).join("")}
+    </ul>
+    <div class="modale-actions modale-actions-reparties">
+      <button class="bouton bouton-doux" onclick="fermerModale();rafraichirMeteo()">🔄 Actualiser</button>
+      <button class="bouton" onclick="fermerModale();allerMeteoComplete()">Réglages météo</button>
+    </div>`);
+}
+
+function allerMeteoComplete() {
+  ongletPlanning = "meteo";
+  aller("#planning");
+  afficher();
+}
+
 /* Résumé court pour l'accueil : uniquement s'il y a quelque chose d'important */
 function resumeMeteoAccueil() {
   if (!etat.meteo.enLigne || !etat.meteo.previsions) return "";

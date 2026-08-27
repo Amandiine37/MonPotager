@@ -69,6 +69,36 @@ a { color: var(--vert); }
   font-size: .95rem;
   letter-spacing: -.01em;
 }
+.barre-actions { display: flex; align-items: center; gap: 2px; }
+
+.meteo-barre {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+.meteo-barre:hover { background: var(--vert-pale); }
+.meteo-barre-temp { font-size: .78rem; font-weight: 700; color: var(--texte); }
+.meteo-eteinte { opacity: .38; }
+.meteo-barre-alerte { background: var(--rouge-pale); }
+.point-alerte {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rouge);
+}
+
 .cloche {
   position: relative;
   background: none;
@@ -597,16 +627,171 @@ a { color: var(--vert); }
   align-items: center;
   gap: 1px;
   padding: 7px 1px 6px;
-  font-size: .61rem;
+  font-size: .55rem;
   text-decoration: none;
   color: var(--texte-doux);
   font-weight: 600;
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
   white-space: nowrap;
 }
-.nav-emoji { font-size: 1.15rem; line-height: 1.1; }
+.nav-emoji { font-size: 1.1rem; line-height: 1.1; }
+
+/* Très petits écrans : on garde les 8 onglets lisibles */
+@media (max-width: 340px) {
+  .nav-item { font-size: .5rem; padding: 6px 0 5px; }
+  .nav-emoji { font-size: 1rem; }
+}
+@media (min-width: 560px) {
+  .nav-item { font-size: .68rem; letter-spacing: -.01em; }
+  .nav-emoji { font-size: 1.2rem; }
+}
 .nav-item.actif { color: var(--vert); }
 .nav-item.actif .nav-emoji { transform: translateY(-1px); }
+
+/* ---------------- Autosuffisance ---------------- */
+
+.carte-bilan { border-left: 4px solid var(--vert); }
+
+.bilan-principal {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.bilan-chiffre {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--vert-fonce);
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+.bilan-libelle { font-size: .88rem; color: var(--texte-doux); }
+.bilan-compact .bilan-chiffre { font-size: 1.9rem; }
+
+.jauge {
+  position: relative;
+  height: 14px;
+  background: #eceae2;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 6px 0 8px;
+}
+.jauge-remplissage {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--vert-clair);
+  transition: width .3s ease;
+}
+.niveau-bas    .jauge-remplissage { background: #c98b6a; }
+.niveau-moyen  .jauge-remplissage { background: var(--soleil); }
+.niveau-bon    .jauge-remplissage { background: var(--vert-clair); }
+.niveau-plein  .jauge-remplissage { background: var(--vert); }
+.jauge-depassement {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .64rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ligne-autonomie { padding: 11px 0; border-top: 1px solid var(--bordure); }
+.ligne-autonomie:first-of-type { border-top: 0; }
+.autonomie-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.autonomie-nom { font-size: .92rem; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.autonomie-nom a { text-decoration: none; color: var(--vert-fonce); }
+.autonomie-chiffres { font-size: .84rem; color: var(--texte-doux); white-space: nowrap; }
+.autonomie-pourcent { font-weight: 700; color: var(--vert-fonce); margin-left: 6px; }
+.autonomie-manque { margin: 0 !important; font-size: .82rem; color: var(--texte-doux); }
+.coche-quota {
+  background: var(--vert);
+  color: #fff;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: .66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+button.puce { font-family: inherit; cursor: pointer; border: 1px solid transparent; }
+button.puce:hover { border-color: var(--vert-clair); }
+
+/* ---------------- Météo ---------------- */
+
+.badge-option { background: var(--terre); }
+
+.encart-confidentialite {
+  background: var(--terre-pale);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: .87rem;
+}
+.encart-confidentialite strong { display: block; margin-bottom: 4px; color: var(--terre); }
+.encart-confidentialite p { margin: 0; }
+
+.meteo-jours {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 10px;
+}
+.meteo-jour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 8px 2px;
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  background: #fff;
+  text-align: center;
+}
+.meteo-gel { border-color: var(--rouge); background: var(--rouge-pale); }
+.meteo-nom { font-size: .66rem; font-weight: 700; color: var(--texte-doux); text-transform: uppercase; }
+.meteo-emoji { font-size: 1.25rem; line-height: 1.3; }
+.meteo-max { font-size: .85rem; font-weight: 700; color: var(--texte); }
+.meteo-min { font-size: .75rem; color: var(--texte-doux); }
+.meteo-min.min-gel { color: var(--rouge); font-weight: 700; }
+.meteo-pluie { font-size: .64rem; color: #4a7fa8; }
+.meteo-sol { font-size: .6rem; color: var(--terre); }
+.meteo-legende {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 6px;
+  font-size: .7rem;
+  color: var(--texte-doux);
+}
+
+.liste-conseils { list-style: none; margin: 0; padding: 0; }
+.conseil {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 11px;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  font-size: .9rem;
+  background: #fff;
+}
+.conseil:last-child { margin-bottom: 0; }
+.conseil-emoji { flex: 0 0 auto; font-size: 1.05rem; }
+.conseil-alerte { background: var(--rouge-pale); color: var(--rouge); }
+.conseil-attention { background: var(--soleil-pale); color: #8a6512; }
+
+@media (max-width: 520px) {
+  .meteo-jours { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 
 /* ---------------- Planning ---------------- */
 

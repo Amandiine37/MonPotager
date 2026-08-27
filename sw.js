@@ -1,17 +1,20 @@
 /* Service worker — permet d'utiliser l'application hors connexion */
 
-const CACHE = "potager-v1.1";
+const CACHE = "potager-v1.4";
 
 const FICHIERS = [
   "index.html",
   "styles.css",
   "app.js",
   "planning.js",
+  "meteo.js",
+  "autonomie.js",
   "vues.js",
   "data-legumes.js",
   "data-aromatiques.js",
   "data-medicinales.js",
   "data-permaculture.js",
+  "data-besoins.js",
   "data-nouveautes.js",
   "manifest.webmanifest",
   "icon-192.png",
@@ -37,6 +40,9 @@ self.addEventListener("activate", e => {
 
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+  // Les appels au service météo ne sont jamais mis en cache :
+  // on veut des prévisions fraîches, et rien d'externe dans le cache.
+  if (new URL(e.request.url).origin !== self.location.origin) return;
   e.respondWith(
     fetch(e.request)
       .then(reponse => {
