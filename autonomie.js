@@ -87,11 +87,21 @@ function bilanAutonomie(annee) {
   };
 }
 
-/* Surface supplémentaire nécessaire pour combler un manque */
+/* Ce qu'il faudrait en plus pour combler un manque.
+   Les légumes se comptent en mètres carrés, les arbres et arbustes en pieds. */
 function surfaceNecessaire(planteId, kgManquants) {
   const b = BESOINS[planteId];
-  if (!b || !b.parM2 || kgManquants <= 0) return null;
-  return Math.round(kgManquants / b.parM2 * 10) / 10;
+  if (!b || kgManquants <= 0) return null;
+
+  if (b.parPied) {
+    const pieds = Math.ceil(kgManquants / b.parPied);
+    return { valeur: pieds, texte: pieds + (pieds > 1 ? " pieds" : " pied") };
+  }
+  if (b.parM2) {
+    const m2 = Math.round(kgManquants / b.parM2 * 10) / 10;
+    return { valeur: m2, texte: nombreFr(m2) + " m²" };
+  }
+  return null;
 }
 
 function palierAutonomie(pourcent) {
@@ -192,7 +202,7 @@ function vueAutonomie() {
         ${jauge(l.pourcent, classeNiveau(l.pourcent))}
         ${!atteint && l.manque > 0 ? `
           <p class="autonomie-manque">
-            Il manque ${nombreFr(Math.round(l.manque * 10) / 10)} kg${surface ? ` — soit environ <strong>${nombreFr(surface)} m²</strong> de plus, au rendement moyen` : ""}.
+            Il manque ${nombreFr(Math.round(l.manque * 10) / 10)} kg${surface ? ` — soit environ <strong>${esc(surface.texte)}</strong> de plus, au rendement moyen` : ""}.
           </p>` : ""}
       </div>`;
   }).join("");

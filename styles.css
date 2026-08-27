@@ -270,6 +270,7 @@ a { color: var(--vert); }
 .carte-perma    { border-left: 4px solid var(--vert-clair); background: var(--vert-pale); }
 .carte-astuce   { border-left: 4px solid var(--terre); background: var(--terre-pale); }
 .carte-medicinale { border-left: 4px solid var(--violet); background: var(--violet-pale); }
+.carte-arbre { border-left: 4px solid var(--terre); background: #fbf7f2; }
 .carte-mois-actuel { border: 2px solid var(--vert-clair); }
 .carte-reglages { background: #fbfbf8; }
 

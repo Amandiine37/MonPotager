@@ -3,7 +3,7 @@
    Données stockées dans le navigateur (localStorage)
    ============================================================ */
 
-const PLANTES = [].concat(LEGUMES, AROMATIQUES, MEDICINALES)
+const PLANTES = [].concat(LEGUMES, FRUITS, AROMATIQUES, MEDICINALES)
   .sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
 
 const PLANTE_PAR_ID = {};
@@ -12,6 +12,7 @@ PLANTES.forEach(p => { PLANTE_PAR_ID[p.id] = p; PLANTE_PAR_NOM[p.nom] = p; });
 
 const CATEGORIES = {
   legume:     { label: "Légume",      pluriel: "Légumes",              emoji: "🥕" },
+  fruit:      { label: "Fruit",       pluriel: "Fruits",               emoji: "🍓" },
   aromatique: { label: "Aromatique",  pluriel: "Aromatiques",          emoji: "🌿" },
   medicinale: { label: "Médicinale",  pluriel: "Plantes médicinales",  emoji: "🌼" }
 };

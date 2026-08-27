@@ -244,18 +244,6 @@ const MEDICINALES = [
         usage:"Infusion de fleurs : 1 cuillère à soupe par tasse, 10 min, 3 fois par jour dès les premiers signes de refroidissement. Sirop de baies cuites en prévention hivernale.",
         precautions:"Les baies CRUES sont toxiques (nausées, vomissements) : toujours les cuire. Feuilles et tiges toxiques." } },
 
-{ id:"framboisier", nom:"Framboisier", latin:"Rubus idaeus", cat:"medicinale", fam:"Rosacées", viv:true,
-  sa:[], sp:[], pl:[10,11,12,2,3], re:[6,7,8,9],
-  expo:"Mi-ombre", sol:"Frais, humifère, acide, drainé", eau:"Régulier",
-  esp:"50 cm sur le rang, 1,5 m entre rangs", prof:"Collet au ras du sol", lev:"—", cyc:"1 an",
-  amis:["Ail","Œillet d'Inde","Ciboulette"],
-  ennemis:["Pomme de terre","Tomate"],
-  perma:"Drageonne beaucoup : délimite le rang et donne les drageons en trop. Paillage permanent de compost et de feuilles mortes, il déteste le sol nu et travaillé (racines superficielles).",
-  conseils:"Remontant : coupe les tiges ayant fructifié après la 2e récolte. Non remontant : coupe à ras les tiges qui ont produit, garde les jeunes.",
-  med:{ partie:"Feuilles", bienfaits:["Prépare l'accouchement (tonique de l'utérus, dernier trimestre)","Règles douloureuses","Diarrhée légère (astringent)","Maux de gorge en gargarisme"],
-        usage:"Infusion de feuilles séchées : 1 cuillère à soupe par tasse, 10 min.",
-        precautions:"À ne PAS utiliser en début de grossesse — uniquement sur les dernières semaines, et avec l'accord d'une sage-femme." } },
-
 { id:"hysope", nom:"Hysope", latin:"Hyssopus officinalis", cat:"medicinale", fam:"Lamiacées", viv:true,
   sa:[3,4], sp:[5], pl:[4,5,9], re:[7,8,9],
   expo:"Plein soleil", sol:"Sec, calcaire, très drainé", eau:"Aucun",

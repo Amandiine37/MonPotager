@@ -4,6 +4,14 @@
 
 const NOUVEAUTES = [
 
+{ version: "1.9", date: "2026-08-27", titre: "Les fruits arrivent en nombre",
+  points: [
+    { emoji: "🍓", texte: "<strong>Nouvelle catégorie Fruits</strong> dans l'écran Plantes et dans le planning : les fraises ne sont plus rangées avec les carottes, et le framboisier n'est plus classé en médicinale." },
+    { emoji: "🫐", texte: "<strong>20 fiches de fruits</strong> : petits fruits (groseillier, cassissier, mûrier, myrtillier, vigne, kiwaï, noisetier) et fruitiers (pommier, poirier, prunier, cerisier, pêcher, figuier)." },
+    { emoji: "🌳", texte: "<strong>Un bloc spécial arbres</strong> sur ces fiches : pollinisation (faut-il deux variétés ?), taille, forme conseillée et nombre d'années avant la première récolte." },
+    { emoji: "📏", texte: "<strong>L'autosuffisance compte en pieds</strong> pour les arbres : « il manque 40 kg de pommes — soit environ 1 pied de plus », et non plus en mètres carrés." }
+  ] },
+
 { version: "1.6", date: "2026-08-27", titre: "Un potager sur tous tes appareils",
   points: [
     { emoji: "☁️", texte: "<strong>Synchronisation entre appareils</strong> : ton potager se retrouve à l'identique sur ton téléphone et ton ordinateur, et se sauvegarde en ligne tout seul à chaque modification." },

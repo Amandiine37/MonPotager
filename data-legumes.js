@@ -328,15 +328,6 @@ const LEGUMES = [
   perma:"Glisse une tuile ou une planche sous chaque fruit pour éviter la pourriture au contact du sol humide.",
   conseils:"Limite à 3-4 fruits par pied pour qu'ils grossissent bien." },
 
-{ id:"melon", nom:"Melon", latin:"Cucumis melo", cat:"legume", fam:"Cucurbitacées", viv:false,
-  sa:[3,4], sp:[5], pl:[5,6], re:[7,8,9],
-  expo:"Plein soleil, très chaud", sol:"Riche, drainé, réchauffé", eau:"Régulier puis stop 15 jours avant récolte",
-  esp:"1 m en tous sens", prof:"2 cm", lev:"5 à 8 jours", cyc:"4 mois",
-  amis:["Maïs doux","Capucine","Bourrache officinale","Basilic"],
-  ennemis:["Concombre","Pomme de terre"],
-  perma:"Sous bâche ou paillage sombre pour réchauffer le sol. Une seule tige avec 4-5 fruits maximum.",
-  conseils:"Mûr quand le pédoncule se craquelle et que l'odeur devient forte." },
-
 { id:"mais-doux", nom:"Maïs doux", latin:"Zea mays", cat:"legume", fam:"Poacées", viv:false,
   sa:[4], sp:[5,6], pl:[5,6], re:[8,9,10],
   expo:"Plein soleil", sol:"Riche, profond", eau:"Abondant à la floraison",
@@ -355,15 +346,6 @@ const LEGUMES = [
   perma:"Zéro entretien, énorme production, se récolte tout l'hiver. ATTENTION : très envahissant, réserve-lui un coin isolé — il ne partira plus jamais.",
   conseils:"Sert aussi de haie brise-vent estivale (2 à 3 m de haut) et de fleur à butiner en septembre." },
 
-{ id:"rhubarbe", nom:"Rhubarbe", latin:"Rheum rhabarbarum", cat:"legume", fam:"Polygonacées", viv:true,
-  sa:[], sp:[], pl:[3,4,10,11], re:[4,5,6,7],
-  expo:"Mi-ombre", sol:"Très riche, frais, profond", eau:"Généreux",
-  esp:"1,2 m en tous sens", prof:"Bourgeon affleurant", lev:"—", cyc:"1re récolte la 2e année",
-  amis:["Chou pommé","Haricot nain","Ail"],
-  ennemis:[],
-  perma:"Vivace de 10 ans et plus. Un seau de compost chaque automne au pied et elle produit sans rien demander. Les feuilles (toxiques à manger) font un excellent paillage ou purin anti-pucerons.",
-  conseils:"Ne jamais couper : tire sur le pétiole en le tournant. Ne récolte pas la 1re année. Coupe les fleurs dès leur apparition." },
-
 { id:"chicoree", nom:"Chicorée frisée / Scarole", latin:"Cichorium endivia", cat:"legume", fam:"Astéracées", viv:false,
   sa:[4,5], sp:[5,6,7], pl:[6,7,8], re:[8,9,10,11,12],
   expo:"Soleil, mi-ombre en été", sol:"Frais, riche", eau:"Régulier",
@@ -372,15 +354,6 @@ const LEGUMES = [
   ennemis:["Laitue / Salade"],
   perma:"Prend le relais des salades d'été quand elles montent en graine. Résiste bien au froid sous voile.",
   conseils:"Blanchir en couvrant le cœur d'une assiette 10 jours avant récolte pour enlever l'amertume." },
-
-{ id:"fraisier", nom:"Fraisier", latin:"Fragaria x ananassa", cat:"legume", fam:"Rosacées", viv:true,
-  sa:[], sp:[], pl:[3,4,8,9,10], re:[5,6,7,8,9],
-  expo:"Soleil, mi-ombre en climat chaud", sol:"Riche en humus, acide, drainé", eau:"Régulier au pied",
-  esp:"30 cm sur le rang, 50 cm entre rangs", prof:"Collet au ras du sol", lev:"—", cyc:"1 an",
-  amis:["Ail","Oignon","Poireau","Épinard","Bourrache officinale","Thym"],
-  ennemis:["Chou pommé","Pomme de terre","Tomate"],
-  perma:"Paille sous les fruits (d'où le nom !) pour éviter la pourriture. Les stolons donnent des plants gratuits à repiquer en août. Renouvelle la plantation tous les 3 ans.",
-  conseils:"La bourrache plantée à côté attire les pollinisateurs et augmente nettement la récolte." },
 
 { id:"pourpier", nom:"Pourpier d'été", latin:"Portulaca oleracea", cat:"legume", fam:"Portulacacées", viv:false,
   sa:[], sp:[5,6,7], pl:[], re:[6,7,8,9],

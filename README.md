@@ -1,7 +1,7 @@
 # Mon Potager en permaculture
 
-Application de gestion du potager : planning de plantation personnalisable, calendrier de semis, fiches
-détaillées des légumes, aromatiques et plantes médicinales, associations de
+Application de gestion du potager : planning de plantation personnalisable, calendrier de semis,
+fiches détaillées des légumes, fruits, aromatiques et plantes médicinales, associations de
 cultures, rotation, travaux du mois et rappels.
 
 Les dates sont calées sur un **climat tempéré Centre / Ouest de la France**.
@@ -29,7 +29,7 @@ fonctionne sans connexion internet.
 | **Planning** | **Ton** calendrier de plantation de l'année : tu choisis tes plantes, tu ajustes les mois, tu suis tes récoltes. |
 | **Autonomie** | Tes récoltes comparées aux besoins de ton foyer, avec des jauges qui se remplissent. |
 | **Calendrier** | Le calendrier de référence : les 12 mois de toutes les plantes de la bibliothèque, sans rien de personnel. |
-| **Plantes** | 91 fiches détaillées : culture, associations, rotation, conseils permaculture, propriétés médicinales. |
+| **Plantes** | 107 fiches détaillées (légumes, fruits, aromatiques, médicinales) : culture, associations, rotation, conseils permaculture, propriétés médicinales. |
 | **Potager** | Tes zones (planches, carrés, serre) et ce que tu y as semé ou planté, avec alertes d'association et de rotation. |
 | **Rappels** | Les tâches à faire, créées automatiquement à partir de tes cultures ou ajoutées à la main. |
 | **Perma** | Principes, travaux mois par mois, rotation des cultures sur 4 ans, recettes de purins et décoctions. |
@@ -92,12 +92,13 @@ en jauges.
 - **Sur ce que tu cultives** — as-tu récolté assez des légumes que tu as effectivement plantés ?
   C'est le chiffre qui dit si tes surfaces sont bien dimensionnées.
 - **Sur une alimentation complète en légumes** — ta vraie part d'autonomie. Il est forcément
-  plus bas, et c'est normal : personne ne cultive les 44 légumes de la liste.
+  plus bas, et c'est normal : personne ne cultive les 63 espèces de la liste.
 
-**Légume par légume**, chaque ligne indique le récolté, le besoin annuel du foyer, le
-pourcentage, et surtout **combien de mètres carrés supplémentaires** il faudrait pour combler
-le manque (« il manque 60 kg de pommes de terre — soit environ 20 m² de plus »). Un badge
-« quota atteint » apparaît à 100 %.
+**Espèce par espèce**, chaque ligne indique le récolté, le besoin annuel du foyer, le
+pourcentage, et surtout **ce qu'il faudrait en plus** pour combler le manque. Les légumes se
+comptent en mètres carrés (« il manque 60 kg de pommes de terre — soit environ 20 m² de plus »),
+les arbres et arbustes en pieds (« il manque 40 kg de pommes — soit environ 1 pied de plus »).
+Un badge « quota atteint » apparaît à 100 %.
 
 En bas, l'appli propose les légumes qui **pèsent le plus** dans l'alimentation d'un foyer et
 qui ne sont pas encore à ton planning, avec le besoin annuel calculé pour ton foyer.
@@ -244,12 +245,13 @@ GitHub Pages, tu repartiras d'un potager vide. Utilise **Exporter / Importer**
 
 ## Contenu de la base
 
-- **46 légumes et petits fruits** (dont capucine et œillet d'Inde, les fleurs compagnes)
+- **43 légumes** (dont capucine et œillet d'Inde, les fleurs compagnes)
+- **20 fruits** : fruits du potager (fraisier, melon, pastèque, physalis, rhubarbe), petits fruits (framboisier, groseilliers, cassissier, mûrier, myrtillier, vigne, kiwaï, noisetier) et fruitiers (pommier, poirier, prunier, cerisier, pêcher, figuier)
 - **20 aromatiques**
 - **25 plantes médicinales**
 - **72 mois de travaux** répartis sur l'année
 - **6 recettes** de purins et décoctions maison
-- **44 légumes** avec besoins annuels et rendements, pour le calcul d'autosuffisance
+- **63 légumes et fruits** avec besoins annuels et rendements, pour le calcul d'autosuffisance
 
 ## Annoncer une nouveauté dans la cloche
 
@@ -271,7 +273,7 @@ plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'
 | `firebase-config.js` | La configuration Firebase, à remplir une fois (voir `GUIDE-FIREBASE.md`) |
 | `firestore.rules` | Règles de sécurité à coller dans la console Firebase |
 | `vues.js` | Affichage des écrans et des formulaires |
-| `data-legumes.js` · `data-aromatiques.js` · `data-medicinales.js` | Base de connaissances des plantes |
+| `data-legumes.js` · `data-fruits.js` · `data-aromatiques.js` · `data-medicinales.js` | Base de connaissances des plantes, un fichier par catégorie |
 | `data-permaculture.js` | Travaux du mois, rotation, préparations, principes |
 | `data-besoins.js` | Besoins annuels par adulte, rendements au m², poids moyens |
 | `data-nouveautes.js` | Le contenu de la cloche 🔔 |

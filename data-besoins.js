@@ -69,8 +69,29 @@ const BESOINS = {
   "fenouil-bulbe":  { kg: 2,  parM2: 2.5, piece: 0.35 },
   "artichaut":      { kg: 2,  parM2: 2,   piece: 0.35 },
   "asperge":        { kg: 1.5, parM2: 0.5, botte: 0.5 },
+  /* --- Fruits du potager (au mètre carré) --- */
   "rhubarbe":       { kg: 3,  parM2: 3 },
-  "fraisier":       { kg: 4,  parM2: 1.5 }
+  "fraisier":       { kg: 4,  parM2: 1.5 },
+  "melon":          { kg: 4,  parM2: 2,   piece: 1.2 },
+  "pasteque":       { kg: 3,  parM2: 2.5, piece: 4 },
+  "physalis":       { kg: 1,  parM2: 1.5 },
+
+  /* --- Petits fruits et fruitiers (au pied : un arbre, pas des m²) --- */
+  "framboisier":    { kg: 4,  parPied: 1.5 },
+  "groseillier":    { kg: 2,  parPied: 4 },
+  "cassissier":     { kg: 2,  parPied: 4 },
+  "groseillier-maquereau": { kg: 1.5, parPied: 4 },
+  "murier":         { kg: 3,  parPied: 8 },
+  "myrtillier":     { kg: 2,  parPied: 3 },
+  "vigne":          { kg: 5,  parPied: 8 },
+  "kiwai":          { kg: 3,  parPied: 15 },
+  "noisetier":      { kg: 1.5, parPied: 4 },
+  "pommier":        { kg: 25, parPied: 60 },
+  "poirier":        { kg: 12, parPied: 40 },
+  "prunier":        { kg: 8,  parPied: 40 },
+  "cerisier":       { kg: 6,  parPied: 30 },
+  "pecher":         { kg: 6,  parPied: 25 },
+  "figuier":        { kg: 4,  parPied: 20 }
 };
 
 /* Conseils affichés selon le niveau d'autonomie atteint */

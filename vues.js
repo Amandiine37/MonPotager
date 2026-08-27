@@ -199,6 +199,7 @@ function barreFiltres(nomVariable, valeurs) {
   const onglets = [
     ["toutes", "Toutes"],
     ["legume", "🥕 Légumes"],
+    ["fruit", "🍓 Fruits"],
     ["aromatique", "🌿 Aromatiques"],
     ["medicinale", "🌼 Médicinales"]
   ];
@@ -358,6 +359,17 @@ function fichePlante(p) {
         <div><dt>Du semis à la récolte</dt><dd>${esc(p.cyc)}</dd></div>
       </dl>
     </div>
+
+    ${p.arbre ? `
+    <div class="carte carte-arbre">
+      <h3>🌳 Arbre et arbuste : ce qui change</h3>
+      <dl class="fiche-infos">
+        <div><dt>Pollinisation</dt><dd>${esc(p.arbre.pollinisation)}</dd></div>
+        <div><dt>Taille</dt><dd>${esc(p.arbre.taille)}</dd></div>
+        <div><dt>Forme conseillée</dt><dd>${esc(p.arbre.forme)}</dd></div>
+        <div><dt>Première récolte</dt><dd>${esc(p.arbre.premiere)}</dd></div>
+      </dl>
+    </div>` : ""}
 
     <div class="carte carte-perma">
       <h3>🌍 En permaculture</h3>
