@@ -74,6 +74,8 @@ function sauver() {
   } catch (e) {
     alert("Impossible d'enregistrer : l'espace de stockage du navigateur est plein.");
   }
+  // Si la synchronisation est active, on programme un envoi (regroupé)
+  if (typeof planifierEnvoi === "function") planifierEnvoi();
 }
 
 const nouvelId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -484,6 +486,7 @@ window.addEventListener("DOMContentLoaded", () => {
   surveillerMisesAJour();
   faireCopieDeSecours();
   if (etat.reglages.bienvenueVue) demanderStockagePersistant();
+  demarrerSync();
 });
 
 /* ---------------- Mises à jour de l'application ----------------

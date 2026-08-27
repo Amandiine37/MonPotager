@@ -183,7 +183,35 @@ depuis l'écran Rappels. Elle rattrape une **fausse manœuvre dans l'appli** (zo
 erreur) mais **pas** un effacement du navigateur : elle est rangée au même endroit que les
 données. Elle ne remplace donc jamais un export.
 
-### L'export, seule vraie sauvegarde
+### La synchronisation entre appareils (Firebase, facultative)
+
+C'est la solution la plus confortable : le potager est **le même sur le téléphone et
+l'ordinateur**, et **sauvegardé en ligne automatiquement** à chaque modification. Elle
+demande de créer un espace Firebase — gratuit, 10 minutes, une seule fois.
+
+Tout est expliqué pas à pas dans **`GUIDE-FIREBASE.md`**. En résumé :
+
+1. Créer un projet Firebase et une base Firestore en Europe.
+2. Activer la connexion **Anonyme** dans Authentication.
+3. Coller le contenu de **`firestore.rules`** dans les règles Firestore, et publier.
+4. Recopier la configuration dans **`firebase-config.js`**.
+5. Dans l'appli : **Rappels → Synchronisation → Activer**.
+
+**Comment ça marche.** Chaque appareil reçoit une identité anonyme. Un potager n'est lisible
+que par les appareils inscrits dans sa liste : connaître le code `potager-xxxx-xxxx` ne suffit
+pas. Pour ajouter un appareil, le premier génère un **code d'appairage à usage unique valable
+24 h**, à saisir sur le second.
+
+**En cas de modification simultanée sur deux appareils, le dernier enregistrement gagne.**
+C'est volontairement simple : un potager est tenu par une personne, pas par une équipe.
+
+**Ce qui n'est pas synchronisé** : les réglages propres à l'appareil — notifications, lieu
+météo et prévisions téléchargées. Ils restent locaux, c'est voulu.
+
+Sans configuration Firebase, ou si on ne l'active pas, l'application fonctionne exactement
+comme avant, entièrement en local.
+
+### L'export, seule vraie sauvegarde locale
 
 Écran **Rappels** → **Exporter ma sauvegarde** : un fichier `.json` que tu ranges où tu veux
 (disque, cloud, mail à toi-même). **Restaurer un fichier** le recharge sur n'importe quel
@@ -194,8 +222,9 @@ appareil — c'est aussi comme ça qu'on transfère son potager du PC au télép
 Comme pour *Tribu* et *reventes* :
 
 1. Créer un dépôt sur le compte GitHub personnel, par exemple `potager`.
-   Il peut être **public** sans souci : il n'y a aucune clé ni aucun mot de passe
-   dans ces fichiers (pas de Firebase ici).
+   Il peut être **public** sans souci : il n'y a aucun mot de passe dans ces fichiers.
+   Les valeurs de `firebase-config.js` ne sont pas des secrets — ce sont les règles de
+   `firestore.rules` qui protègent les données.
 2. Y déposer **tous les fichiers** de ce dossier. `serve.py` et `make_icons.py`
    ne servent qu'en local, mais les garder ne pose aucun problème.
 3. Dans le dépôt : **Settings → Pages → Source : `main` / dossier `/ (root)`**.
@@ -238,6 +267,9 @@ plus récent. La pastille rouge réapparaît alors sur la cloche jusqu'à ce qu'
 | `meteo.js` | Les prévisions Open-Meteo et leur traduction en conseils |
 | `autonomie.js` | L'écran Autosuffisance : jauges, conversions, surfaces |
 | `sauvegarde.js` | Protection des données : rappel d'export, copie de secours, stockage durable |
+| `sync.js` | Synchronisation Firebase entre appareils |
+| `firebase-config.js` | La configuration Firebase, à remplir une fois (voir `GUIDE-FIREBASE.md`) |
+| `firestore.rules` | Règles de sécurité à coller dans la console Firebase |
 | `vues.js` | Affichage des écrans et des formulaires |
 | `data-legumes.js` · `data-aromatiques.js` · `data-medicinales.js` | Base de connaissances des plantes |
 | `data-permaculture.js` | Travaux du mois, rotation, préparations, principes |

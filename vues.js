@@ -735,6 +735,8 @@ function blocNotifications() {
         : `<button class="bouton" onclick="demanderNotifications()">Activer les notifications</button>`}
     </div>
 
+    ${carteSynchronisation()}
+
     ${carteSauvegarde()}`;
 }
 

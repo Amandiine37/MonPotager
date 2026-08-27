@@ -1,0 +1,105 @@
+/* =========================================================================
+   MON POTAGER — règles de sécurité Firebase
+   =========================================================================
+   À copier-coller dans : console Firebase → Firestore Database → Règles,
+   puis cliquer sur PUBLIER.
+
+   Ce que ces règles garantissent, même si quelqu'un bidouille l'application
+   depuis son navigateur :
+
+   1. Un potager n'est lisible QUE par les appareils inscrits dans sa liste
+      `membresUid`. Connaître le code du potager ne suffit pas.
+   2. On ajoute un appareil uniquement avec un CODE D'APPAIRAGE valide, non
+      expiré et non utilisé. Et l'appareil ne peut alors s'ajouter que lui-même,
+      sans pouvoir lire ni écraser ce qui existe déjà.
+   3. Un code d'appairage ne sert qu'une fois et expire au bout de 24 heures.
+   4. Personne ne peut lister les potagers ni les codes d'appairage.
+   ========================================================================= */
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- petites fonctions utilitaires ----------
+
+    function connecte() {
+      return request.auth != null;
+    }
+    function potager(code) {
+      return get(/databases/$(database)/documents/potagers/$(code)).data;
+    }
+    function estMembre(code) {
+      return connecte() && request.auth.uid in potager(code).membresUid;
+    }
+    function appairage(jeton) {
+      return get(/databases/$(database)/documents/appairages/$(jeton)).data;
+    }
+    function appairageValide(code, jeton) {
+      return jeton is string
+        && exists(/databases/$(database)/documents/appairages/$(jeton))
+        && appairage(jeton).potager == code
+        && appairage(jeton).utilise == false
+        && appairage(jeton).expireLe > request.time.toMillis();
+    }
+
+    // ---------- codes d'appairage ----------
+    // Le jeton est un code aléatoire à usage unique, valable 24 h.
+    // On ne peut jamais LISTER les jetons, seulement en ouvrir un précis.
+
+    match /appairages/{jeton} {
+      allow get: if connecte();
+      allow list: if false;
+
+      allow create: if connecte()
+                    && estMembre(request.resource.data.potager)
+                    && request.resource.data.utilise == false
+                    && request.resource.data.expireLe is int
+                    && request.resource.data.expireLe <= request.time.toMillis() + 86400000;
+
+      // seule la mise à "utilise" est permise, et une seule fois
+      allow update: if connecte()
+                    && resource.data.utilise == false
+                    && request.resource.data.diff(resource.data)
+                         .affectedKeys().hasOnly(['utilise', 'utiliseLe'])
+                    && request.resource.data.utilise == true;
+
+      allow delete: if connecte() && estMembre(resource.data.potager);
+    }
+
+    // ---------- le potager ----------
+
+    match /potagers/{code} {
+
+      // Un appareil qui s'appaire n'a PAS encore le droit de lire le potager :
+      // il ne peut donc qu'AJOUTER son identifiant (arrayUnion), jamais
+      // recopier, lire ou écraser ce qui existe.
+      function sAppaire() {
+        let jeton = request.resource.data.jetonUtilise;
+        return connecte()
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['membresUid', 'jetonUtilise'])
+          && request.auth.uid in request.resource.data.membresUid
+          && !(request.auth.uid in resource.data.membresUid)
+          && request.resource.data.membresUid.size() == resource.data.membresUid.size() + 1
+          && request.resource.data.membresUid.size() <= 10
+          && appairageValide(code, jeton);
+      }
+
+      allow get: if estMembre(code);
+      allow list: if false;
+
+      // On crée son propre potager : il faut s'y inscrire soi-même,
+      // et seul, comme unique appareil de départ.
+      allow create: if connecte()
+                    && request.resource.data.membresUid.size() == 1
+                    && request.auth.uid in request.resource.data.membresUid;
+
+      allow update: if estMembre(code) || sAppaire();
+
+      // Un membre peut supprimer le potager en ligne (l'appli garde
+      // toujours une copie locale sur chaque appareil).
+      allow delete: if estMembre(code);
+    }
+  }
+}

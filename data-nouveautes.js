@@ -4,6 +4,14 @@
 
 const NOUVEAUTES = [
 
+{ version: "1.6", date: "2026-08-27", titre: "Un potager sur tous tes appareils",
+  points: [
+    { emoji: "☁️", texte: "<strong>Synchronisation entre appareils</strong> : ton potager se retrouve à l'identique sur ton téléphone et ton ordinateur, et se sauvegarde en ligne tout seul à chaque modification." },
+    { emoji: "📱", texte: "<strong>Appairage sécurisé</strong> : un code à usage unique, valable 24 h, à saisir sur le second appareil. Connaître le code de ton potager ne suffit pas à le lire." },
+    { emoji: "🔌", texte: "<strong>Ça marche toujours hors connexion</strong> : tu jardines sans réseau, tout part en ligne au retour. Et la synchronisation reste facultative — sans elle, l'appli fonctionne comme avant." },
+    { emoji: "⚙️", texte: "À activer dans <strong>Rappels → Synchronisation</strong>, après avoir suivi une fois le guide Firebase fourni avec l'appli." }
+  ] },
+
 { version: "1.5", date: "2026-08-27", titre: "Ne plus perdre son potager",
   points: [
     { emoji: "💾", texte: "<strong>Rappel de sauvegarde</strong> : si plus de 14 jours passent sans export, l'appli te le signale sur l'accueil. Tes données ne vivent que dans ce navigateur — personne ne peut les récupérer à ta place." },
