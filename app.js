@@ -427,12 +427,35 @@ function argumentPage() {
 
 function aller(hash) { location.hash = hash; }
 
+/* Un lien qui pointe vers un écran inconnu de cette version = fichiers dépareillés.
+   Plutôt que de retomber silencieusement sur l'accueil (ce qui donne l'impression
+   qu'un bouton ne marche pas), on le dit et on propose de recharger. */
+function pageInconnue() {
+  const h = (location.hash || "").slice(1).split("/")[0];
+  return h && !PAGES.includes(h) ? h : null;
+}
+
 function afficher() {
+  const conteneur = document.getElementById("contenu");
+
+  const inconnue = pageInconnue();
+  if (inconnue) {
+    conteneur.innerHTML = `
+      <header class="entete"><h1>Écran indisponible</h1></header>
+      <div class="carte carte-alerte">
+        <h3>Cette page vient d'une version plus récente</h3>
+        <p>L'écran « ${inconnue} » n'existe pas dans la version actuellement chargée : ton
+        navigateur utilise encore une ancienne copie de l'application.</p>
+        <p><strong>Recharge la page</strong> pour récupérer la dernière version.</p>
+        <button class="bouton" onclick="location.reload()">Recharger l'application</button>
+      </div>`;
+    return;
+  }
+
   const page = pageCourante();
   document.querySelectorAll(".nav-item").forEach(b => {
     b.classList.toggle("actif", b.dataset.page === page);
   });
-  const conteneur = document.getElementById("contenu");
   conteneur.innerHTML = VUES[page](argumentPage());
   conteneur.scrollTop = 0;
   window.scrollTo(0, 0);

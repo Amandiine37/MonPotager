@@ -1,21 +1,26 @@
-/* Service worker — permet d'utiliser l'application hors connexion */
+/* Service worker — permet d'utiliser l'application hors connexion.
 
-const CACHE = "potager-v1.4";
+   À chaque livraison : incrémenter VERSION ici ET les ?v=… dans index.html.
+   C'est ce qui garantit que le navigateur retélécharge bien tous les fichiers
+   au lieu d'en garder d'anciens, ce qui donne des nouveautés qui « ne marchent pas ». */
+
+const VERSION = "1.4";
+const CACHE = "potager-v" + VERSION;
 
 const FICHIERS = [
   "index.html",
-  "styles.css",
-  "app.js",
-  "planning.js",
-  "meteo.js",
-  "autonomie.js",
-  "vues.js",
-  "data-legumes.js",
-  "data-aromatiques.js",
-  "data-medicinales.js",
-  "data-permaculture.js",
-  "data-besoins.js",
-  "data-nouveautes.js",
+  "styles.css?v=" + VERSION,
+  "app.js?v=" + VERSION,
+  "planning.js?v=" + VERSION,
+  "meteo.js?v=" + VERSION,
+  "autonomie.js?v=" + VERSION,
+  "vues.js?v=" + VERSION,
+  "data-legumes.js?v=" + VERSION,
+  "data-aromatiques.js?v=" + VERSION,
+  "data-medicinales.js?v=" + VERSION,
+  "data-permaculture.js?v=" + VERSION,
+  "data-besoins.js?v=" + VERSION,
+  "data-nouveautes.js?v=" + VERSION,
   "manifest.webmanifest",
   "icon-192.png",
   "icon-512.png"

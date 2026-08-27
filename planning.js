@@ -134,8 +134,10 @@ function basculerFait(id, cle, mois) {
 function totalRecoltes(entree) {
   const totaux = {};
   (entree.recoltes || []).forEach(r => {
-    const u = r.unite || "kg";
-    totaux[u] = (totaux[u] || 0) + (Number(r.quantite) || 0);
+    let u = r.unite || "kg";
+    let q = Number(r.quantite) || 0;
+    if (u === "g") { u = "kg"; q = q / 1000; }   // on n'affiche jamais « 5 000 g »
+    totaux[u] = (totaux[u] || 0) + q;
   });
   return totaux;
 }
@@ -506,6 +508,8 @@ function planningVueMeteo(annee) {
     : (decalage > 0 ? `${decalage} mois plus tard` : `${-decalage} mois plus tôt`);
 
   return `
+    ${blocMeteo()}
+
     <div class="carte">
       <h3>❄️ Mes dates de gelées</h3>
       <p class="note">Ce sont les deux dates qui commandent tout le potager. Observe-les sur ton terrain et affine-les d'année en année : un fond de vallée gèle bien plus tard qu'un coteau exposé au sud.</p>

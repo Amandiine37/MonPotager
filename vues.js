@@ -78,6 +78,10 @@ function vueAccueil() {
       <h1>${MOIS[mois - 1]} au potager</h1>
     </header>
 
+    ${resumeMeteoAccueil()}
+
+    ${resumeAutonomieAccueil()}
+
     ${retard.length ? `
       <div class="carte carte-alerte">
         <h3>⏰ En retard <span class="compteur">${retard.length}</span></h3>
@@ -878,6 +882,7 @@ const VUES = {
   accueil: vueAccueil,
   calendrier: vueCalendrier,
   planning: (arg) => vuePlanning(arg),
+  autonomie: (arg) => vueAutonomiePage(arg),
   plantes: vuePlantes,
   potager: vuePotager,
   taches: vueTaches,
